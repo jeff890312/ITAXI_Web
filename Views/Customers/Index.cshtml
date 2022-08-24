@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ITAXI.Models.CustomerDB>
+
+@{
+    ViewBag.Title = "Index";
+    var account = "";
+    if (Session["admin"] == null || string.IsNullOrWhiteSpace(Session["admin"].ToString()))
+    {
+        Response.Redirect("~/Home/about");
+    }
+    else
+    {
+        account = Session["admin"].ToString();
+    }
+}
+
+<body>
+    <div class="table-container">
+        <h1 class="headimg">乘客名單</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        乘客學號
+                    </th>
+                    <th>
+                        姓名
+                    </th>
+                    <th>
+                        電話
+                    </th>
+                    @*<th>
+                            電子郵件
+                        </th>*@
+                    <th>
+                        大頭貼
+                    </th>
+                    <th>
+                        性別
+                    </th>
+                    <th>按鈕</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-label="乘客帳號">
+                            @Html.DisplayFor(modelItem => item.Cus_ID)
+                        </td>
+                        <td data-label="乘客名字">
+                            @Html.DisplayFor(modelItem => item.Cus_Name)
+                        </td>
+                        <td data-label="乘客電話">
+                            @Html.DisplayFor(modelItem => item.Cus_Phone)
+                        </td>
+                        @*<td data-label="電子郵件">
+                                @Html.DisplayFor(modelItem => item.Cus_Phone)
+                            </td>*@
+                        <td data-label="乘客大頭貼">
+                            @Html.DisplayFor(modelItem => item.Cus_Photo)
+                        </td>
+                        <td data-label="乘客性別">
+                            @Html.DisplayFor(modelItem => item.Cus_Sex)
+                        </td>
+                        <td data-label="按鈕">
+                            @Html.ActionLink("編輯", "Edit", "Customers", new { id = item.Cus_ID }, new { @class = "btn" })
+                            @Html.ActionLink("詳細資料", "Details", "Customers", new { id = item.Cus_ID }, new { @class = "btn" })
+                            @Html.ActionLink("刪除", "Delete", "Customers", new { id = item.Cus_ID }, new { @class = "btn" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</body>
+
+
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>

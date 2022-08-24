@@ -1,0 +1,56 @@
+﻿@model ITAXI.Models.CustomerDB
+@{
+    ViewBag.Title = "Dr_look_Cus_Details";
+
+}
+
+<main>
+    <section class="detail section" id="detail">
+        <h2 class="section__title">乘客詳細資料</h2>
+
+        <div class="detail__container grid">
+            <div class="detail__data">
+                <p class="detail__description">@Html.DisplayFor(model => model.Cus_Name)</p>
+                <img src="@Url.Content(Model.Cus_Photo)" alt="" class="detail__img" />
+            </div>
+
+            <div class="detail__information">
+                <h3 class="detail__information-title">詳細資料</h3>
+
+                <div class="detail__information-data">
+                    <i class="bx bx-user detail__information-icon"></i>
+                    @Html.DisplayFor(model => model.Cus_Name)
+                </div>
+                <div class="detail__information-data">
+                    <i class="bx bx-phone detail__information-icon"></i>
+                    @Html.DisplayFor(model => model.Cus_Phone)
+                </div>
+                @*<div class="detail__information-data">
+                        <i class="ri-mail-line detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Cus_Phone)
+                    </div>*@
+                <div class="detail__information-data">
+                    <i class="bx bx-lock-alt detail__information-icon"></i>
+                    @Html.DisplayFor(model => model.Cus_Password)
+                </div>
+                <div class="detail__information-data">
+                    <i class="bx bx-heart detail__information-icon"></i>
+                    @Html.DisplayFor(model => model.Cus_Sex)
+                </div>
+                <a @*onclick="location.href='@Url.Action("Edit/" + account, controllerName)'"*@ class="button">聯絡乘客</a>
+                <a @*onclick="location.href='@Url.Action("Edit/" + account, controllerName)'"*@ class="button">開始載客</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<script src="~/Scripts/main.js"></script>
+
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>

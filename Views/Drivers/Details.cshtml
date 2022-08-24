@@ -1,0 +1,144 @@
+﻿@model ITAXI.Models.DriverDB
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    var customerAccount = Session["account"] as String;
+    var driverAccount = Session["Dr_account"] as String;
+    var loginAsCustomer = !string.IsNullOrEmpty(customerAccount);
+    var loginAsDriver = !string.IsNullOrEmpty(driverAccount);
+    var guest = !loginAsCustomer && !loginAsDriver;
+    var controllerName = "";
+    var account = "";
+    controllerName = "Drivers";
+    account = driverAccount;
+
+    <main>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Dr_Num)
+        @Html.HiddenFor(model => model.Dr_taxi_driver_license)
+        @Html.HiddenFor(model => model.Dr_vehicle_license)
+        @Html.HiddenFor(model => model.Dr_License)
+        @Html.HiddenFor(model => model.Dr_good_citizen)
+
+        <section class="detail section" id="detail">
+            <h2 class="section__title">個人詳細資料</h2>
+
+            <div class="detail__container grid">
+                <div class="detail__data">
+                    <p class="detail__description">@Html.DisplayFor(model => model.Dr_Name)</p>
+                    <img src="@Url.Content(Model.Dr_Photo)" alt="" class="detail__img" />
+                </div>
+
+                <div class="detail__information">
+                    <h3 class="detail__information-title">詳細資料</h3>
+
+                    <div class="detail__information-data">
+                        <i class="bx bx-user detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_ID)
+                    </div>
+                    <div class="detail__information-data">
+                        <i class="bx bx-user detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_Name)
+                    </div>
+                    <div class="detail__information-data">
+                        <i class="bx bx-phone detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_Phone)
+                    </div>
+                    <div class="detail__information-data">
+                        <i class="bx bx-mail-send detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_Email)
+                    </div>
+                    @*<div class="detail__information-data">
+                            <i class="ri-mail-line detail__information-icon"></i>
+                            @Html.DisplayFor(model => model.Dr_Phone)
+                        </div>*@
+                    <div class="detail__information-data">
+                        <i class="bx bx-lock-alt detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_Password)
+                    </div>
+                    <div class="detail__information-data">
+                        <i class="bx bx-heart detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_Sex)
+                    </div>
+                    <div class="detail__information-data">
+                        <i class="bx bx-star detail__information-icon"></i>
+                        評價分數:<strong style="font-size:40px;padding:10px;">@TempData["counter"]</strong>/5
+                        @TempData["nono"]
+                    </div>
+                    
+                    <a onclick="location.href='@Url.Action("Edit/" + account, controllerName)'" class="button">修改個人資料</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line scrollup__icon"></i>
+    </a>
+    <script src="~/Scripts/main.js"></script>
+    <hr />
+    <footer class="footer section">
+        <div class="footer__container grid">
+            <div class="footer__data">
+                <h3 class="footer__subtitle">司機</h3>
+                <ul>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Create", "Drivers")'" class="footer__link">司機註冊</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Login", "Drivers")'" class="footer__link">司機登入</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("immediately", "Order")'" class="footer__link">預約訂單</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("reservation", "Order")'" class="footer__link">立即訂單</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Details/" + account, controllerName)'" class="footer__link">個人資訊</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Contact", "Home")'" class="footer__link">聯絡我們</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("QA", "Home")'" class="footer__link">常見問題</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer__data">
+                <h3 class="footer__subtitle">乘客</h3>
+                <ul>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Create", "Customers")'" class="footer__link">乘客註冊</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Login", "Customers")'" class="footer__link">乘客登入</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__data">
+                <h3 class="footer__title">ITAXI</h3>
+                <p class="footer__description"></p>
+                <div>
+                    <a href="#" target="_blank" class="footer__social">
+                        <i class="ri-app-store-line"></i>
+                    </a>
+                    <a href="#" target="_blank" class="footer__social">
+                        <i class="ri-google-play-line"></i>
+                    </a>
+                    <a href="#" target="_blank" class="footer__social">
+                        <i class="ri-mail-line"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__right">
+            <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+        </div>
+    </footer>
+}
+

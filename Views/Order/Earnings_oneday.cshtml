@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ITAXI.Models.information_OrderDB>
+<link href="~/Content/cards.css" rel="stylesheet" />
+<body>
+    <div class="cardcontainer">
+        <h2>收益</h2>
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-5">開始日期</div>
+                <div class="col col-6">結束日期</div>
+                <div class="col col-7">總單數</div>
+                <div class="col col-8">總金額</div>
+
+            </li>
+
+            <li class="table-row">
+                <div class="col col-5" data-label="開始日期">@TempData["Start"]</div>
+                <div class="col col-6" data-label="結束日期">@TempData["End"]</div>
+                <div class="col col-7" data-label="總單數">
+                    @TempData["Orderall"]
+                    @TempData["nono"]
+                </div>
+                <div class="col col-8" data-label="總金額"><strong style="font-size:40px;padding:10px;">@TempData["Moneyall"]</strong>元</div>
+            </li>
+
+        </ul>
+
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-5">訂單日期</div>
+                <div class="col col-6">訂單類型</div>
+                <div class="col col-7">金額(每人)</div>
+                <div class="col col-8">訂單人數</div>
+
+            </li>
+            @foreach (var item in Model)
+            {
+                <li class="table-row">
+                    <div class="col col-5" data-label="訂單日期">@Html.DisplayFor(modelItem => item.Ord_date)</div>
+                    <div class="col col-6" data-label="訂單類型">@Html.DisplayFor(modelItem => item.Ord_Type)</div>
+                    <div class="col col-7" data-label="金額(每人)">@Html.DisplayFor(modelItem => item.Ord_Money)</div>
+                    <div class="col col-8" data-label="訂單人數">@Html.DisplayFor(modelItem => item.Ord_Numpeople)</div>
+
+                </li>
+            }
+        </ul>
+    </div>
+
+
+    </div>
+</body>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>

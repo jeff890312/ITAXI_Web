@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ITAXI.Models.EvaluationDB>
+
+@{
+    ViewBag.Title = "Search_Evaluations";
+}
+<link href="~/Content/cards.css" rel="stylesheet" />
+<body>
+
+    <div class="cardcontainer">
+        <h2>評價</h2>
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-5">司機編號</div>
+                <div class="col col-6">司機名稱</div>
+                <div class="col col-7">總評價</div>
+                <div class="col col-8">總單數</div>
+
+            </li>
+            
+            <li class="table-row">
+                <div class="col col-5" data-label="司機編號">@TempData["ID"]</div>
+                <div class="col col-6" data-label="司機名稱">@TempData["Name"]</div>
+                <div class="col col-7" data-label="總評價">
+                    <strong style="font-size:40px;padding:10px;">@TempData["counter"]<i class='bx bx-star'></i></strong>
+                    @TempData["nono"]
+                </div>
+                <div class="col col-8" data-label="總單數">@TempData["1"]@TempData["nono"]則評價</div>
+            </li>
+            
+        </ul>
+        
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">訂單編號</div>
+                <div class="col col-2">訂單日期</div>
+                <div class="col col-3">評價星星</div>
+                <div class="col col-4">評價文字</div>
+
+            </li>
+            @foreach (var item in Model)
+            {
+                <li class="table-row">
+                    <div class="col col-1" data-label="訂單編號">@Html.DisplayFor(modelItem => item.Order_Num)</div>
+                    <div class="col col-2" data-label="訂單日期">@Html.DisplayFor(modelItem => item.information_OrderDB.Ord_date)</div>
+                    <div class="col col-3" data-label="評價星星">@Html.DisplayFor(modelItem => item.Ev_Estar)</div>
+                    <div class="col col-4" data-label="評價文字">@Html.DisplayFor(modelItem => item.Ev_evaluation)</div>
+
+                </li>
+            }
+        </ul>
+    </div>
+</body>

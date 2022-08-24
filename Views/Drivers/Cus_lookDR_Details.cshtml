@@ -1,0 +1,79 @@
+﻿@model ITAXI.Models.DriverDB
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    var customerAccount = Session["account"] as String;
+    var driverAccount = Session["Dr_account"] as String;
+    var loginAsCustomer = !string.IsNullOrEmpty(customerAccount);
+    var loginAsDriver = !string.IsNullOrEmpty(driverAccount);
+    var guest = !loginAsCustomer && !loginAsDriver;
+    var controllerName = "";
+    var account = "";
+    controllerName = "Drivers";
+    account = driverAccount;
+
+    <main>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Dr_Num)
+        @Html.HiddenFor(model => model.Dr_taxi_driver_license)
+        @Html.HiddenFor(model => model.Dr_vehicle_license)
+        @Html.HiddenFor(model => model.Dr_License)
+        @Html.HiddenFor(model => model.Dr_good_citizen)
+        @Html.HiddenFor(model => model.Dr_Password)
+
+
+        <section class="detail section" id="detail">
+            <h2 class="section__title">司機詳細資料</h2>
+
+            <div class="detail__container grid">
+                <div class="detail__data">
+                    <p class="detail__description">@Html.DisplayFor(model => model.Dr_Name)</p>
+                    <img src="@Url.Content(Model.Dr_Photo)" alt="" class="detail__img" />
+                </div>
+
+                <div class="detail__information">
+                    <h3 class="detail__information-title">詳細資料</h3>
+
+                    <div class="detail__information-data">
+                        <i class="bx bx-user detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_ID)
+                    </div>
+                    <div class="detail__information-data">
+                        <i class="bx bx-user detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_Name)
+                    </div>
+                    <div class="detail__information-data">
+                        <i class="bx bx-phone detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_Phone)
+                    </div>
+                    @*<div class="detail__information-data">
+            <i class="ri-mail-line detail__information-icon"></i>
+            @Html.DisplayFor(model => model.Dr_Phone)
+        </div>*@
+                    <div class="detail__information-data">
+                        <i class="bx bx-heart detail__information-icon"></i>
+                        @Html.DisplayFor(model => model.Dr_Sex)
+                    </div>
+                    <div class="detail__information-data">
+                        <i class="bx bx-star detail__information-icon"></i>
+                        評價分數:<strong style="font-size:40px;padding:10px;">@TempData["counter"]</strong>/5
+                        @TempData["nono"]
+                    </div>
+
+
+
+                   
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line scrollup__icon"></i>
+    </a>
+    <script src="~/Scripts/main.js"></script>
+
+}

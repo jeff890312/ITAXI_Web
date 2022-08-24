@@ -1,0 +1,93 @@
+﻿@model ITAXI.Models.information_OrderDB
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<main>
+
+    <section class="detail section" id="detail">
+        <h2 class="section__title">刪除訂單</h2>
+
+        <div class="detail__container grid">
+            <div class="detail__data">
+                <img src="~/mapimage/R15_R16.jpg" alt="" class="detail__img" />
+
+            </div>
+
+            <div class="detail__information">
+                <h3 class="detail__information-title">詳細資料</h3>
+
+                <div class="detail__information-data">
+                    <i class="ri-list-ordered detail__information-icon">訂單編號</i>
+                    @Html.DisplayFor(model => model.Order_Num)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-taxi-line detail__information-icon">司機帳號</i>
+                    @Html.DisplayFor(model => model.Dr_ID)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-user-line detail__information-icon">乘客學號</i>
+                    @Html.DisplayFor(model => model.Cus_ID)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-refresh-line detail__information-icon">訂單狀態</i>
+                    @Html.DisplayFor(model => model.Ord_Status)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-menu-line detail__information-icon">訂單類型</i>
+                    @Html.DisplayFor(model => model.Ord_Type)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-calendar-line detail__information-icon">訂單日期</i>
+                    @Html.DisplayFor(model => model.Ord_date)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-money-dollar-box-line detail__information-icon">訂單金額</i>
+                    @Html.DisplayFor(model => model.Ord_Money)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-time-line detail__information-icon">上車時間</i>
+                    @Html.DisplayFor(model => model.Boarding_Time)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-map-pin-user-line detail__information-icon">上車地點</i>
+                    @Html.DisplayFor(model => model.Boarding_Location)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-timer-2-line detail__information-icon">下車時間</i>
+                    @Html.DisplayFor(model => model.Drop_off_Time)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-map-pin-line detail__information-icon">下車地點</i>
+                    @Html.DisplayFor(model => model.Drop_off_location)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-timer-line detail__information-icon">乘車時間</i>
+                    @Html.DisplayFor(model => model.Journey_Time)
+                </div>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="確認刪除" class="button" onclick="location.href='@Url.Action("Index","Order")'" />
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>

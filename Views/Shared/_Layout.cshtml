@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ITAXI</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/scrollreveal.min.js"></script>
+    @*css*@
+    <link href="~/Content/home.css" rel="stylesheet" />
+    @*icon*@
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    @*js*@
+
+</head>
+<body>
+    <header class="header" id="header">
+
+        <nav class="nav container">
+            @{
+                var admin_Cus = Session["admin"] as String;
+                var admin_Dr = Session["Dr_admin"] as String;
+                var customerAccount = Session["account"] as String;
+                var driverAccount = Session["Dr_account"] as String;
+                var loginAsadmin_Cus = !string.IsNullOrEmpty(admin_Cus);
+                var loginAsDr_admin = !string.IsNullOrEmpty(admin_Dr);
+                var loginAsCustomer = !string.IsNullOrEmpty(customerAccount);
+                var loginAsDriver = !string.IsNullOrEmpty(driverAccount);
+                var guest = !loginAsCustomer && !loginAsDriver;
+                var controllerName = "";
+                var account = "";
+                if (guest)
+                {
+                    <a class="nav__logo" href="@Url.Action("Index", "Home")">ITAXI</a>
+                    <div class="nav__menu" id="nav-menu">
+
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="#about" class="nav__link">關於我們</a>
+                            </li>
+                            <li class="nav__item dropdown">
+                                <a href="#Customers" class="nav__link dropdown__link">乘客<i class="bx bx-chevron-down dropdown__icon"></i></a>
+
+                                <ul class="dropdown__menu">
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Create", "Customers")" class="nav__link">註冊</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Login", "Customers")" class="nav__link">登入</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav__item dropdown">
+                                <a href="#Drivers" class="nav__link dropdown__link">司機 <i class="bx bx-chevron-down dropdown__icon"></i></a>
+
+                                <ul class="dropdown__menu">
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Create", "Drivers")" class="nav__link">註冊</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Login", "Drivers")" class="nav__link">登入</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav__item">
+                                <a href="@Url.Action("Contact", "Home")" class="nav__link">聯絡我們</a>
+                            </li>
+                        </ul>
+
+                        <div class="nav__dark">
+                            <span class="change-theme-name">Dark mode</span>
+                            <i class="ri-moon-line change-theme" id="theme-button"></i>
+                        </div>
+
+                        <i class="ri-close-line nav__close" id="nav-close"></i>
+                    </div>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class="ri-function-line"></i>
+                    </div>
+                }
+                else if (loginAsDriver)
+                {
+                    controllerName = "Drivers";
+                    account = driverAccount;
+                    <a class="nav__logo" href="@Url.Action("Logining", "Drivers")">ITAXI</a>
+
+                    <div class="nav__menu" id="nav-menu">
+
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="#about" class="nav__link">關於我們</a>
+                            </li>
+                            <li class="nav__item dropdown">
+                                <a href="#Customers" class="nav__link dropdown__link">乘客 <i class="bx bx-chevron-down dropdown__icon"></i></a>
+
+                                <ul class="dropdown__menu">
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Create", "Customers")" class="nav__link">註冊</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Login", "Customers")" class="nav__link">登入</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav__item dropdown">
+                                <a href="#Drivers" class="nav__link dropdown__link">司機 <i class="bx bx-chevron-down dropdown__icon"></i></a>
+
+                                <ul class="dropdown__menu">
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("immediately", "Order")" class="nav__link">立即訂單-汽車</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("immediately_Moto", "Order")" class="nav__link">立即訂單-機車</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("reservation", "Order")" class="nav__link">預約訂單-汽車</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("reservation_Moto", "Order")" class="nav__link">預約訂單-機車</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Details/" + account, controllerName)" class="nav__link">會員資訊</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("PassengerRecord", "Order")" class="nav__link">載客紀錄</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Earn_day", "Order")" class="nav__link">本日收益</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav__item">
+                                <a href="@Url.Action("Contact","Home")" class="nav__link">聯絡我們</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Details/" + account, controllerName)" style="color: var(--text-color);">您好~@account</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("LogOff", "Home")" style="color: var(--text-color);">登出</a>
+                            </li>
+                        </ul>
+
+                        <div class="nav__dark">
+                            <span class="change-theme-name">Dark mode</span>
+                            <i class="ri-moon-line change-theme" id="theme-button"></i>
+                        </div>
+
+                        <i class="ri-close-line nav__close" id="nav-close"></i>
+                    </div>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class="ri-function-line"></i>
+                    </div>
+                }
+                else // login as customer
+                {
+                    controllerName = "Customers";
+                    account = customerAccount;
+
+                    <a class="nav__logo" href="@Url.Action("Logining", "Customers")">ITAXI</a>
+
+                    <div class="nav__menu" id="nav-menu">
+
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="#about" class="nav__link">關於我們</a>
+                            </li>
+
+                            <li class="nav__item dropdown">
+                                <a href="#Customers" class="nav__link dropdown__link">乘客 <i class="bx bx-chevron-down dropdown__icon"></i></a>
+
+                                <ul class="dropdown__menu">
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Create_immediately_Car", "Order")" class="nav__link">立即搭車-汽車</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Create_immediately_Moto", "Order")" class="nav__link">立即搭車-機車</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Create_reservation_Car", "Order")" class="nav__link">預約搭車-汽車</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Create_reservation_Moto", "Order")" class="nav__link">預約搭車-機車</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Details/" + account, controllerName)" class="nav__link">會員資訊</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("HitchhikingRecord", "Order")" class="nav__link">搭車紀錄</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                            <li class="nav__item dropdown">
+                                <a href="#Drivers" class="nav__link dropdown__link">司機 <i class="bx bx-chevron-down dropdown__icon"></i></a>
+
+                                <ul class="dropdown__menu">
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Create", "Drivers")" class="nav__link">註冊</a>
+                                    </li>
+                                    <li class="dropdown__item">
+                                        <a href="@Url.Action("Login", "Drivers")" class="nav__link">登入</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav__item">
+                                <a href="@Url.Action("Contact","Home")" class="nav__link">聯絡我們</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Details/" + account, controllerName)" style="color: var(--text-color);">您好~@account</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("LogOff", "Home")" style="color: var(--text-color);">登出</a>
+                            </li>
+                        </ul>
+
+                        <div class="nav__dark">
+                            <span class="change-theme-name">Dark mode</span>
+                            <i class="ri-moon-line change-theme" id="theme-button"></i>
+                        </div>
+
+                        <i class="ri-close-line nav__close" id="nav-close"></i>
+                    </div>
+
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class="ri-function-line"></i>
+                    </div>
+                }
+            }
+        </nav>
+    </header>
+    <script src="~/Scripts/main.js"></script>
+
+    <div>
+        @RenderBody()
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

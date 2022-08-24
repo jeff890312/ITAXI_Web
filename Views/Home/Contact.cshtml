@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "ITAXI客服中心";
+}
+
+<br />
+<body onload="init()">
+    <section class="contactpage section" id="contact">
+        <h2 class="section__title">聯絡我們</h2>
+        <div class="contactpage__container container grid">
+            <div>
+                <div class="contactpage__information"></div>
+                <i class="ri-phone-line contactpage__icon"></i>
+                <div>
+                    <h3 class="contactpage__title">呂專員</h3>
+                    <span class="contactpage__subtitle">0970-710-857</span>
+                </div>
+                <div>
+                    <h3 class="contactpage__title">賴專員</h3>
+                    <span class="contactpage__subtitle">0930-371-622</span>
+                </div>
+                <div>
+                    <h3 class="contactpage__title">施專員</h3>
+                    <span class="contactpage__subtitle">0970-648-389</span>
+                </div>
+                <div>
+                    <h3 class="contactpage__title">蔡專員</h3>
+                    <span class="contactpage__subtitle">0908-381-105</span>
+                </div>
+                <div>
+                    <h3 class="contactpage__title">王專員</h3>
+                    <span class="contactpage__subtitle">0911-902-745</span>
+                </div>
+            </div>
+            <div>
+                <div class="contactpage__information"></div>
+                <i class="ri-mail-line contactpage__icon"></i>
+                <div>
+                    <h3 class="contactpage__title">Email</h3>
+                    <span class="contactpage__subtitle">itaxi20210915@gmail.com</span>
+                </div>
+            </div>
+            <form action="" enctype="text/plain" class="contactpage__form grid" accept-charset="utf-8">
+                <div class="contactpage__inputs grid">
+                    <div class="contactpage__content">
+                        <label for="" class="contactpage__label">帳號</label>
+                        <input id="nameText" type="text" name="Name" class="contactpage__input" required />
+                    </div>
+                    <div class="contactpage__content">
+                        <label for="" class="contactpage__label">問題</label>
+                        <input id="subText" type="text" name="Subject" class="contactpage__input" required />
+                    </div>
+                    <div class="contactpage__content">
+                        <label for="" class="contactpage__label">Email</label>
+                        <input id="emailText" type="email" name="Email" class="contactpage__input" required />
+                    </div>
+                </div>
+                <div class="contactpage__content">
+                    <label for="" class="contactpage__label">給我們的回饋~</label>
+                    <textarea id="bodyText" name="your-message" cols="0" rows="7" class="contactpage__input" aria-required="true" aria-invalid="false"></textarea>
+                </div>
+                <div>
+                    <input type="button" value="傳送" class="button button--flex" onclick="submitHandler();" />
+                    <a id="mailTo"></a>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</body>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+
+<script>
+    var initSubject = '', initBody = '';
+    function submitHandler() {
+        var to = "itaxi20210915@gmail.com";
+        var name = nameText.value;
+        var email = emailText.value;
+        var subject = subText.value;
+
+        var body = "" + bodyText.value + '%0A%0A%0A';
+        body += "From：" + nameText.value + '%0A';
+        body += "Email：" + emailText.value + '%0A';
+
+        mailTo.href = "mailto:" + to + "?subject=" + subject + "&body=" + body;
+        mailTo.click();
+    }
+
+    function init() {
+        subText.value = initSubject;
+        toText.value = initTo;
+        bodyText.value = initBody;
+    }
+</script>

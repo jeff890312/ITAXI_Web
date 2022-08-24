@@ -1,0 +1,274 @@
+﻿@model ITAXI.Models.information_OrderDB
+@{
+    ViewBag.Title = "Create";
+}
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+    let map;
+    let panorama;
+
+    function initMap() {
+        const berkeley = { lat: 25.1353656, lng: 121.5374251 };
+        const sv = new google.maps.StreetViewService();
+        panorama = new google.maps.StreetViewPanorama(
+            document.getElementById("pano")
+        );
+
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: berkeley,
+            zoom: 14,
+            streetViewControl: false,
+        });
+
+
+    }
+
+    function txt() {
+        var start = document.getElementById("Boarding_Location").value;
+        var end = document.getElementById("Drop_off_location").value;
+        var address = "https://www.google.com.tw/maps?saddr=" + start + "&daddr=" + end + "&output=embed";
+        document.getElementById("embedmap").src = address;
+    }
+</script>
+<script language="javaScript">
+    var timmnow = new Date();
+    var mm = (timmnow.getMonth() + 1 < 10 ? '0' : '') + (timmnow.getMonth() + 1)
+    var dd = (timmnow.getDate() + 1 < 10 ? '0' : '') + (timmnow.getDate() + 1)
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <body>
+        <div class="loginorder" data-role="content">
+            <div class="login__content">
+                <div class="login__img">
+                    <iframe id="embedmap" frameborder="0" width="100%"></iframe>
+                </div>
+
+                <div class="logincus__forms">
+                    <div class="login__register" id="login-in">
+                        <h1 class="login__title">立即搭乘</h1>
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class="bx bx-user login__icon"></i>
+                                    @Html.LabelFor(model => model.Cus_ID, "學號", htmlAttributes: new { @class = "login__text" })
+                                </div>
+
+                                <input type="text" name="Cus_ID" value="@Session["account"]" readonly="readonly" class="login__input" />
+
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Cus_ID, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box" style="display:none">
+                                <div class="login__label">
+                                    <i class='bx bx-user-pin login__icon'></i>
+                                    @Html.LabelFor(model => model.Ord_Status, htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <input type="text" name="Ord_Status" value="配對中" readonly="readonly" class="login__input" />
+
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_Status, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-phone login__icon'></i>
+                                    @Html.LabelFor(model => model.Ord_Type, "訂單類別", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <input type="text" name="Ord_Type" value="立即訂單" readonly="readonly" class="login__input" />
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_Type, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-user-plus login__icon'></i>
+                                    @Html.LabelFor(model => model.Ord_Numpeople, "訂單人數", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <select name="Ord_Numpeople" class="login__input">
+                                    <option value="1人">1人</option>
+                                    <option value="2人">2人</option>
+                                    <option value="3人">3人</option>
+                                    <option value="4人">4人</option>
+                                    <option value="5人">5人</option>
+                                </select>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_Numpeople, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bxs-car login__icon'></i>
+                                    @Html.LabelFor(model => model.Ord_Classification, "交通工具", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <input type="text" name="Ord_Classification" value="汽車" readonly="readonly" class="login__input" />
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_Classification, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class="ri-time-line login__icon"></i>
+                                    @Html.LabelFor(model => model.Ord_date, "搭車日期", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <input type="text" name="Ord_date" id="today" readonly="readonly" class="login__input" />
+                                <script language="javaScript">
+                                    var now = new Date();
+                                    var timmnow = new Date();
+                                    var mm = (timmnow.getMonth() + 1 < 10 ? '0' : '') + (timmnow.getMonth() + 1)
+                                    today.value = now.getFullYear() + "-" + mm + "-" + dd;
+                                </script>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_date, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='ri-time-line login__icon'></i>
+                                    @Html.LabelFor(model => model.Boarding_Time, "搭車時間", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <input type="text" name="Boarding_Time" id="time" readonly="readonly" class="login__input" />
+                                <script language="javaScript">
+                                    var nowtime = new Date();
+                                    time.value = nowtime.getHours() + ":" + nowtime.getMinutes();
+                                </script>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Boarding_Time, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='ri-money-cny-circle-line  login__icon'></i>
+                                    @Html.LabelFor(model => model.Ord_Money, "搭車金額(每人)", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <input type="text" name="Ord_Money" value="70" readonly="readonly" class="login__input" />
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_Money, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+                        @*<div>
+                                <div class="login__box">
+                                    <div class="login__label">
+                                        <i class='ri-map-pin-line  login__icon'></i>
+                                        @Html.LabelFor(model => model.Boarding_Location, "上車地點", htmlAttributes: new { @class = "login__text" })
+                                    </div>
+                                    <select name="Boarding_Location" class="login__input">
+                                        <option value="文化後山">文化後山</option>
+                                        <option value="劍潭捷運站">劍潭捷運站</option>
+                                        <option value="士林捷運山">士林捷運站</option>
+                                        <option value="芝山捷運站">芝山捷運站</option>
+                                        <option value="明德捷運站">明德捷運站</option>
+                                        <option value="石牌捷運站">石牌捷運站</option>
+                                    </select>
+                                </div>
+                                <div class="danger__box">
+                                    @Html.ValidationMessageFor(model => model.Boarding_Location, "", new { @class = "text__danger" })
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="login__box">
+                                    <div class="login__label">
+                                        <i class='ri-map-pin-line  login__icon'></i>
+                                        @Html.LabelFor(model => model.Drop_off_location, "下車地點", htmlAttributes: new { @class = "login__text" })
+                                    </div>
+                                    <select name="Drop_off_location" class="login__input">
+                                        <option value="文化後山">文化後山</option>
+                                        <option value="劍潭捷運站">劍潭捷運站</option>
+                                        <option value="士林捷運山">士林捷運站</option>
+                                        <option value="芝山捷運站">芝山捷運站</option>
+                                        <option value="明德捷運站">明德捷運站</option>
+                                        <option value="石牌捷運站">石牌捷運站</option>
+                                    </select>
+                                </div>
+                                <div class="danger__box">
+                                    @Html.ValidationMessageFor(model => model.Drop_off_location, "", new { @class = "text__danger" })
+                                </div>
+                            </div>*@
+                        <div id="mmaapp">
+                            <div data-role="fieldcontain">
+                                <div class="login__box">
+                                    <div class="login__label">
+                                        <i class='ri-map-pin-line  login__icon'></i>
+                                        @Html.LabelFor(model => model.Boarding_Location, "上車地點", htmlAttributes: new { @class = "login__text" })
+                                    </div>
+                                    <select name="Boarding_Location" class="login__input" id="Boarding_Location" value="" onclick="txt()">
+                                        <option value="文化後山">文化後山</option>
+                                        <option value="劍潭捷運站">劍潭捷運站</option>
+                                        <option value="士林捷運站">士林捷運站</option>
+                                        <option value="芝山捷運站">芝山捷運站</option>
+                                        <option value="明德捷運站">明德捷運站</option>
+                                        <option value="石牌捷運站">石牌捷運站</option>
+                                    </select>
+                                </div>
+                                <div class="danger__box">
+                                    @Html.ValidationMessageFor(model => model.Boarding_Location, "", new { @class = "text__danger" })
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="login__box">
+                                    <div class="login__label">
+                                        <i class='ri-map-pin-line  login__icon'></i>
+                                        @Html.LabelFor(model => model.Drop_off_location, "下車地點", htmlAttributes: new { @class = "login__text" })
+                                    </div>
+                                    <select name="Drop_off_location" class="login__input" id="Drop_off_location" value="" onclick="txt()">
+                                        <option value="文化後山">文化後山</option>
+                                        <option value="劍潭捷運站">劍潭捷運站</option>
+                                        <option value="士林捷運站">士林捷運站</option>
+                                        <option value="芝山捷運站">芝山捷運站</option>
+                                        <option value="明德捷運站">明德捷運站</option>
+                                        <option value="石牌捷運站">石牌捷運站</option>
+                                    </select>
+                                </div>
+                                <div class="danger__box">
+                                    @Html.ValidationMessageFor(model => model.Drop_off_location, "", new { @class = "text__danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="login__button">確認訂單</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </body>
+
+
+}
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+<script>
+    setInterval('window.location.reload();', 60000);
+</script>
+

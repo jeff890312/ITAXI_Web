@@ -1,0 +1,254 @@
+﻿@{
+    ViewBag.Title = "ITAXI首頁";
+}
+<main>
+    @*封面照片*@
+    <section class="home" id="home">
+
+        <img src="~/image/header_4.jpg" alt="" class="home__img" />
+        <div class="home__container container grid">
+            <div class="home__data">
+                <span class="home__data-subtitle">
+                    快速方便，叫車不用等<br>品質第一，顧客至上<br>你值得擁有尊貴的服務。
+                </span>
+                <h1 class="home__data-title">ITAXI</h1>
+            </div>
+            @*<div class="home__social">
+                    <a href="#" target="_blank" class="home__social-link">
+                        <i class="ri-app-store-line"></i>
+                    </a>
+                    <a href="#" target="_blank" class="home__social-link">
+                        <i class="ri-google-play-line"></i>
+                    </a>
+                    <a href="#" target="_blank" class="home__social-link">
+                        <i class="ri-mail-line"></i>
+                    </a>
+                </div>*@
+        </div>
+    </section>
+
+    @*基本介紹*@
+    <section class="about section" id="about">
+        <div class="about__container container grid">
+            <div class="about__data">
+                <h2 class="section__title about__title">關於我們</h2>
+                <p class="about__description">
+                    可以用預約的方法來搭乘共乘，
+                    <br />
+                    像文化這種常常下雨的地方，
+                    <br />
+                    如果可以預約就不用淋著雨站在旁邊等共乘，
+                    <br />
+                    系統上會顯示還有多久才能搭車，
+                    <br />
+                    乘客一下訂單司機就會收到訂單可以更有效率的排班。
+                </p>
+            </div>
+            <div class="about__img">
+                <div class="about__img-overlay">
+                    <img src="~/image/customer_2.jpg" alt="" class="about__img-one" />
+                </div>
+
+                <div class="about__img-overlay">
+                    <img src="~/image/driver_1.jpg" alt="" class="about__img-two" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*tab 按鈕*@
+    <div>
+        <div class="tab tab__container" data-toggle="tab" href="#Customers">
+            <h2 class="tab__title">
+                乘客
+                <br />Customer
+            </h2>
+        </div>
+
+        <div class="tab tab__container" data-toggle="tab" href="#Drivers">
+            <h2 class="tab__title">
+                司機
+                <br />Driver
+            </h2>
+        </div>
+    </div>
+    @*tabcontent司機乘客*@
+    <div class="tab-content section">
+        @*乘客*@
+        <section id="Customers" class="tab-pane fade in active">
+            @*註冊登入*@
+            <section class="customer section">
+                <div class="customer__container container grid">
+                    <div class="customer__img">
+                        <div class="customer__img-overlay">
+                            <img src="~/image/customer_1.PNG" alt="" class="customer__img-one" />
+                        </div>
+                    </div>
+                    <div class="customer__data">
+                        <h2 class="section__title customer__title">成為乘客</h2>
+                        <p class="customer__description">
+                            為了讓沒有車的大學生們，
+                            <br />
+                            在下課的時候能有更便利的回家方法，
+                            <br />
+                            希望我們可以讓學生有更多元的方式回到溫暖的家。
+                        </p>
+                        <a onclick="location.href='@Url.Action("Create", "Customers")'" class="button" style="margin-bottom:10px;">乘客註冊</a>
+                        <a onclick="location.href='@Url.Action("Login", "Customers")'" class="button" style="margin-bottom:10px;">乘客登入</a>
+                    </div>
+                </div>
+            </section>
+            @*搭車*@
+            <section class="customer section">
+                <div class="customer__container container grid">
+
+                    <div class="customer__img">
+                        <div class="customer__img-overlay">
+                            <img src="~/image/customer_2.jpg" alt="" class="customer__img-one" />
+                        </div>
+                    </div>
+                    <div class="customer__data">
+                        <h2 class="section__title customer__title">開始搭車</h2>
+                        <a onclick="location.href='@Url.Action("Create_immediately", "Order")'" class="button" style="margin-bottom:10px;">立即搭車</a>
+                        <a onclick="location.href='@Url.Action("Create_reservation", "Order")'" class="button" style="margin-bottom:10px;">預約搭車</a>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        @*司機*@
+        <section id="Drivers" class="tab-pane fade">
+            @*註冊登入*@
+            <section class="driver section">
+                <div class="driver__container container grid">
+                    <div class="driver__img">
+                        <div class="driver__img-overlay">
+                            <img src="~/image/driver_1.jpg" alt="" class="driver__img-one" />
+                        </div>
+                    </div>
+                    <div class="driver__data">
+                        <h2 class="section__title driver__title">成為司機</h2>
+                        <p class="driver__description">
+                            假如今天是學生自己有開車會是騎車的話，
+                            <br />
+                            想賺點外快也可以透過我們的系統，有個學生司機的選項，
+                            <br />
+                            既可以賺點外快也可以讓想回家一起回家。
+                        </p>
+                        <a onclick="location.href='@Url.Action("Create", "Drivers")'" class="button" style="margin-bottom:10px;">司機註冊</a>
+                        <a onclick="location.href='@Url.Action("Login", "Drivers")'" class="button" style="margin-bottom:10px;">司機登入</a>
+                    </div>
+                </div>
+            </section>
+            @*載客*@
+            <section class="driver section">
+                <div class="driver__container container grid">
+                    <div class="driver__img">
+                        <div class="driver__img-overlay">
+                            <img src="~/image/driver_2.jpg" alt="" class="driver__img-one" />
+                        </div>
+                    </div>
+                    <div class="driver__data">
+                        <h2 class="section__title driver__title">開始載客</h2>
+                        <a onclick="location.href='@Url.Action("immediately", "Order")'" class="button" style="margin-bottom:10px;">立即訂單</a>
+                        <a onclick="location.href='@Url.Action("reservation", "Order")'" class="button" style="margin-bottom:10px;">預約訂單</a>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+    @*聯絡我們*@
+    <section class="contact section" id="contact">
+        <div class="contact__container container grid">
+            <div class="contact__img">
+                <div class="contact__img-overlay">
+                    <img src="~/image/customerservice_2.jpg" alt="" class="contact__img-one" />
+                </div>
+            </div>
+            <div class="contact__data">
+                <h2 class="section__title contact__title">讓我們變得更好~</h2>
+                <a onclick="location.href='@Url.Action("Contact", "Home")'" class="button" style="margin-bottom:10px;">聯絡我們</a>
+                <a onclick="location.href='@Url.Action("QA", "Home")'" class="button" style="margin-bottom:10px;">常見問題</a>
+            </div>
+        </div>
+    </section>
+
+
+</main>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<hr />
+<footer class="footer section">
+    <div class="footer__container grid">
+
+        <div class="footer__data">
+            <h3 class="footer__subtitle">乘客</h3>
+            <ul>
+                <li class="footer__item">
+                    <a onclick="location.href='@Url.Action("Create", "Customers")'" class="footer__link">乘客註冊</a>
+                </li>
+                <li class="footer__item">
+                    <a onclick="location.href='@Url.Action("Login", "Customers")'" class="footer__link">乘客登入</a>
+                </li>
+                <li class="footer__item">
+                    <a onclick="location.href='@Url.Action("Create_immediately", "Order")'" class="footer__link">立即搭車</a>
+                </li>
+                <li class="footer__item">
+                    <a onclick="location.href='@Url.Action("Create_reservation", "Order")'" class="footer__link">預約搭車</a>
+                </li>
+                @*<li class="footer__item">
+                        <a href="#" class="footer__link">個人資訊</a>
+                    </li>
+                    <li class="footer__item">
+                        <a href="#" class="footer__link">搭車紀錄</a>
+                    </li>
+                    <li class="footer__item">
+                        <a href="#" class="footer__link">聯絡我們</a>
+                    </li>*@
+            </ul>
+        </div>
+
+        <div class="footer__data">
+            <h3 class="footer__subtitle">司機</h3>
+            <ul>
+                <li class="footer__item">
+                    <a onclick="location.href='@Url.Action("Create", "Drivers")'" class="footer__link">司機註冊</a>
+                </li>
+                <li class="footer__item">
+                    <a onclick="location.href='@Url.Action("Login", "Drivers")'" class="footer__link">司機登入</a>
+                </li>
+                <li class="footer__item">
+                    <a onclick="location.href='@Url.Action("reservation", "Order")'" class="footer__link">預約訂單</a>
+                </li>
+                <li class="footer__item">
+
+                    <a onclick="location.href='@Url.Action("immediately", "Order")'" class="footer__link">立即訂單</a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="footer__data">
+            <h3 class="footer__title">ITAXI</h3>
+            <p class="footer__description"></p>
+            <div>
+                <a href="#" target="_blank" class="footer__social">
+                    <i class="ri-app-store-line"></i>
+                </a>
+                <a href="#" target="_blank" class="footer__social">
+                    <i class="ri-google-play-line"></i>
+                </a>
+                <a href="#" target="_blank" class="footer__social">
+                    <i class="ri-mail-line"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+
+</footer>
+<script src="~/Scripts/scrollreveal.min.js"></script>
+

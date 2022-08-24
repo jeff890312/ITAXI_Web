@@ -1,0 +1,157 @@
+﻿@model ITAXI.Models.DriverDB
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Dr_taxi_driver_license)
+    @Html.HiddenFor(model => model.Dr_vehicle_license)
+    @Html.HiddenFor(model => model.Dr_License)
+    @Html.HiddenFor(model => model.Dr_good_citizen)
+    <body>
+        <div class="login">
+            <div class="login__content">
+                <div class="login__img">
+                    <img src="@Url.Content(Model.Dr_Photo)" alt="" />
+                </div>
+
+                <div class="logincus__forms">
+                    <div class="login__register" id="login-in">
+                        <h1 class="login__title">修改個人資料</h1>
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class="bx bx-user login__icon"></i>
+                                    @Html.LabelFor(model => model.Dr_ID, "帳號", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <div class="login__readtext">
+                                    @Html.DisplayFor(model => model.Dr_ID)
+                                </div>
+                                @*@Html.EditorFor(model => model.Cus_ID, new { htmlAttributes = new { @class = "login__input", @readonly = "readonly" } })*@
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Dr_ID, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-user-pin login__icon'></i>
+                                    @Html.LabelFor(model => model.Dr_Name, "姓名", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Dr_Name, new { htmlAttributes = new { @class = "login__input" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Dr_Name, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-phone login__icon'></i>
+                                    @Html.LabelFor(model => model.Dr_Phone, "電話", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Dr_Phone, new { htmlAttributes = new { @class = "login__input" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Dr_Phone, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='ri-mail-line login__icon'></i>
+                                    @Html.LabelFor(model => model.Dr_Email, "電子信箱", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Dr_Email, new { htmlAttributes = new { @class = "login__input" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Dr_Email, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+                        @*<div>
+            <div class="login__box">
+                <div class="login__label">
+                    <i class='ri-mail-line login__icon'></i>
+                    @Html.LabelFor(model => model.Dr_Phone, "電子郵件", htmlAttributes: new { @class = "login__text" })
+                </div>
+                @Html.EditorFor(model => model.Dr_Phone, new { htmlAttributes = new { @class = "login__input" } })
+            </div>
+            <div class="danger__box">
+                @Html.ValidationMessageFor(model => model.Dr_Phone, "", new { @class = "text__danger" })
+            </div>
+        </div>*@
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class="bx bx-lock login__icon"></i>
+                                    @Html.LabelFor(model => model.Dr_Password, "密碼", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Dr_Password, new { htmlAttributes = new { @class = "login__input" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Dr_Password, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-heart  login__icon'></i>
+                                    @Html.LabelFor(model => model.Dr_Sex, "性別", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <select name="Cus_Sex" class="login__input" readonly="readonly">
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Dr_Sex, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-image login__icon'></i>
+                                    @Html.LabelFor(model => model.Dr_Photo, "大頭貼", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Dr_Photo, new { htmlAttributes = new { @class = "login__input", @type = "file" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Dr_Photo, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+
+                        <button type="submit" class="login__button">確認修改</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line scrollup__icon"></i>
+    </a>
+    <script src="~/Scripts/main.js"></script>
+}
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

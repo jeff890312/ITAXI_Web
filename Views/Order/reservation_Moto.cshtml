@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ITAXI.Models.information_OrderDB>
+@{
+    ViewBag.Title = "reservation_Moto";
+}
+
+@if (TempData["message"] != null)
+{
+    <script type="text/javascript">
+        var message =@Html.Raw(Json.Encode(TempData["message"]));
+        alert(message);
+    </script>
+}
+
+<link href="~/Content/orders.css" rel="stylesheet" />
+<body>
+    <div class="table-container">
+        <h1 class="headimg">預約訂單</h1>
+    </div>
+    <div class="ticketcontainer">
+        @foreach (var item in Model)
+        {
+            <div class="bp-card" data-clickthrough="link">
+                <div class="bp-card_label">
+                    <div class="bd-border_solid"></div>
+                    <div class="bd-border_dotted"></div>
+                </div>
+                <div class="bp-card_content">
+                    <p class="secondary">@Html.DisplayFor(modelItem => item.Ord_date)  @Html.DisplayFor(modelItem => item.Boarding_Time)</p>
+                    <h4>
+                        @Html.DisplayFor(modelItem => item.Boarding_Location)
+                        <i class='bx bx-right-arrow-alt'></i>
+                        @Html.DisplayFor(modelItem => item.Drop_off_location)
+                    </h4>
+
+                    <ul>
+
+                        <li>
+                            @Html.DisplayFor(modelItem => item.Ord_Status)
+                        </li>
+                       
+                        <li>
+                            金額:@Html.DisplayFor(modelItem => item.Ord_Money)
+                        </li>
+                    </ul>
+
+                    <a>
+                        @Html.ActionLink("接收訂單", "acceptreservation", "Order", new { id = item.Order_Num }, new { @class = "price" })
+                    </a>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</body>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+

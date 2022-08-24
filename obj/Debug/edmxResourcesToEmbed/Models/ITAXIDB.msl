@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ITAXIModelStoreContainer" CdmEntityContainer="ITAXIEntities">
+    <EntitySetMapping Name="CustomerDB">
+      <EntityTypeMapping TypeName="ITAXIModel.CustomerDB">
+        <MappingFragment StoreEntitySet="CustomerDB">
+          <ScalarProperty Name="Cus_Email" ColumnName="Cus_Email" />
+          <ScalarProperty Name="Cus_ID" ColumnName="Cus_ID" />
+          <ScalarProperty Name="Cus_Name" ColumnName="Cus_Name" />
+          <ScalarProperty Name="Cus_Phone" ColumnName="Cus_Phone" />
+          <ScalarProperty Name="Cus_Password" ColumnName="Cus_Password" />
+          <ScalarProperty Name="Cus_Sex" ColumnName="Cus_Sex" />
+          <ScalarProperty Name="Cus_Photo" ColumnName="Cus_Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DriverDB">
+      <EntityTypeMapping TypeName="ITAXIModel.DriverDB">
+        <MappingFragment StoreEntitySet="DriverDB">
+          <ScalarProperty Name="Dr_Email" ColumnName="Dr_Email" />
+          <ScalarProperty Name="Dr_Num" ColumnName="Dr_Num" />
+          <ScalarProperty Name="Dr_ID" ColumnName="Dr_ID" />
+          <ScalarProperty Name="Dr_Name" ColumnName="Dr_Name" />
+          <ScalarProperty Name="Dr_Phone" ColumnName="Dr_Phone" />
+          <ScalarProperty Name="Dr_Password" ColumnName="Dr_Password" />
+          <ScalarProperty Name="Dr_Sex" ColumnName="Dr_Sex" />
+          <ScalarProperty Name="Dr_Photo" ColumnName="Dr_Photo" />
+          <ScalarProperty Name="Dr_License" ColumnName="Dr_License" />
+          <ScalarProperty Name="Dr_vehicle_license" ColumnName="Dr_vehicle_license" />
+          <ScalarProperty Name="Dr_good_citizen" ColumnName="Dr_good_citizen" />
+          <ScalarProperty Name="Dr_taxi_driver_license" ColumnName="Dr_taxi_driver_license" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EvaluationDB">
+      <EntityTypeMapping TypeName="ITAXIModel.EvaluationDB">
+        <MappingFragment StoreEntitySet="EvaluationDB">
+          <ScalarProperty Name="Ev_Num" ColumnName="Ev_Num" />
+          <ScalarProperty Name="Order_Num" ColumnName="Order_Num" />
+          <ScalarProperty Name="Ev_Estar" ColumnName="Ev_Estar" />
+          <ScalarProperty Name="Ev_evaluation" ColumnName="Ev_evaluation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="information_OrderDB">
+      <EntityTypeMapping TypeName="ITAXIModel.information_OrderDB">
+        <MappingFragment StoreEntitySet="information_OrderDB">
+          <ScalarProperty Name="Ord_Classification" ColumnName="Ord_Classification" />
+          <ScalarProperty Name="Ord_Numpeople" ColumnName="Ord_Numpeople" />
+          <ScalarProperty Name="Order_Num" ColumnName="Order_Num" />
+          <ScalarProperty Name="Dr_ID" ColumnName="Dr_ID" />
+          <ScalarProperty Name="Cus_ID" ColumnName="Cus_ID" />
+          <ScalarProperty Name="Ord_Status" ColumnName="Ord_Status" />
+          <ScalarProperty Name="Ord_Type" ColumnName="Ord_Type" />
+          <ScalarProperty Name="Ord_date" ColumnName="Ord_date" />
+          <ScalarProperty Name="Ord_Money" ColumnName="Ord_Money" />
+          <ScalarProperty Name="Boarding_Time" ColumnName="Boarding_Time" />
+          <ScalarProperty Name="Boarding_Location" ColumnName="Boarding_Location" />
+          <ScalarProperty Name="Drop_off_Time" ColumnName="Drop_off_Time" />
+          <ScalarProperty Name="Drop_off_location" ColumnName="Drop_off_location" />
+          <ScalarProperty Name="Journey_Time" ColumnName="Journey_Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="information_Dr_Order">
+      <EntityTypeMapping TypeName="ITAXIModel.information_Dr_Order">
+        <MappingFragment StoreEntitySet="information_Dr_Order">
+          <ScalarProperty Name="Journey_Time" ColumnName="Journey_Time" />
+          <ScalarProperty Name="Drop_off_location" ColumnName="Drop_off_location" />
+          <ScalarProperty Name="Drop_off_Time" ColumnName="Drop_off_Time" />
+          <ScalarProperty Name="Boarding_Location" ColumnName="Boarding_Location" />
+          <ScalarProperty Name="Boarding_Time" ColumnName="Boarding_Time" />
+          <ScalarProperty Name="Ord_Money" ColumnName="Ord_Money" />
+          <ScalarProperty Name="Ord_Numpeople" ColumnName="Ord_Numpeople" />
+          <ScalarProperty Name="Ord_date" ColumnName="Ord_date" />
+          <ScalarProperty Name="Ord_Type" ColumnName="Ord_Type" />
+          <ScalarProperty Name="Ord_Status" ColumnName="Ord_Status" />
+          <ScalarProperty Name="Cus_ID" ColumnName="Cus_ID" />
+          <ScalarProperty Name="Dr_ID" ColumnName="Dr_ID" />
+          <ScalarProperty Name="Order_Num" ColumnName="Order_Num" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

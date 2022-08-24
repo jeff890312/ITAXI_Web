@@ -1,0 +1,87 @@
+﻿@model ITAXI.Models.EvaluationDB
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <body>
+        <div class="login">
+            <div class="login__content">
+                <div class="login__img">
+                    <img src="~/image/evaluation.svg" alt="" />
+                </div>
+
+                <div class="logincus__forms">
+                    <div class="login__register" id="login-in">
+                        <h1 class="login__title">建立評價資料</h1>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-border-all login__icon'></i>
+                                    @Html.LabelFor(model => model.Order_Num, "訂單編號", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <div class="login__readtext">
+                                    <input type="text" name="Order_Num" value="@Session["ord"]" readonly="readonly">
+                                    @*@Html.EditorFor(model => model.Order_Num, new { htmlAttributes = new { @class = "login__input" } })*@
+                                </div>
+                                <div class="danger__box">
+                                    @Html.ValidationMessageFor(model => model.Order_Num, "", new { @class = "text__danger" })
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="login__box">
+                                    <div class="login__label">
+                                        <i class='bx bx-star login__icon'></i>
+                                        @Html.LabelFor(model => model.Ev_Estar, "評價星星", htmlAttributes: new { @class = "login__text" })
+                                    </div>
+                                    <select name="Ev_Estar" class="login__input">
+                                        <option value="5星評價">5星評價</option>
+                                        <option value="4星評價">4星評價</option>
+                                        <option value="3星評價">3星評價</option>
+                                        <option value="2星評價">2星評價</option>
+                                        <option value="1星評價">1星評價</option>
+                                    </select>
+                                </div>
+                                <div class="danger__box">
+                                    @Html.ValidationMessageFor(model => model.Ev_Estar, "", new { @class = "text__danger" })
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="login__box">
+                                    <div class="login__label">
+                                        <i class="bx bx-text login__icon"></i>
+                                        @Html.LabelFor(model => model.Ev_evaluation, "評價回饋", htmlAttributes: new { @class = "login__text" })
+                                    </div>
+                                    <textarea name="Ev_evaluation" id="" cols="0" rows="5" class="login__input"></textarea>
+                                    @*@Html.EditorFor(model => model.Ev_evaluation, new { htmlAttributes = new { @class = "login__input" } })*@
+                                </div>
+                                <div class="danger__box">
+                                    @Html.ValidationMessageFor(model => model.Ev_evaluation, "", new { @class = "text__danger" })
+                                </div>
+                            </div>
+
+                            <button type="submit" class="login__button">完成評價</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line scrollup__icon"></i>
+    </a>
+    <script src="~/Scripts/main.js"></script>
+}
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>

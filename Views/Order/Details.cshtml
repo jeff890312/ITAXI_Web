@@ -1,0 +1,145 @@
+﻿@model ITAXI.Models.information_OrderDB
+
+@{
+    ViewBag.Title = "Details";
+}
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+    let map;
+    let panorama;
+
+    function initMap() {
+        const berkeley = { lat: 25.1353656, lng: 121.5374251 };
+        const sv = new google.maps.StreetViewService();
+        panorama = new google.maps.StreetViewPanorama(
+            document.getElementById("pano")
+        );
+
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: berkeley,
+            zoom: 14,
+            streetViewControl: false,
+        });
+
+
+    }
+
+    function txt() {
+        var start = document.getElementById("Boarding_Location").value;
+        var end = document.getElementById("Drop_off_location").value;
+        var address = "https://www.google.com.tw/maps?saddr=" + start + "&daddr=" + end + "&output=embed";
+        document.getElementById("embedmap").src = address;
+    }
+</script>
+<main>
+
+    <section class="detail section" id="detail">
+        <h2 class="section__title">訂單詳細資料</h2>
+
+        <div class="detail__container grid">
+            <div class="detail__data">
+                <div data-role="content">
+                    <div id="mmaapp" style="display:none">
+                        <div data-role="fieldcontain">
+                            <input name="Boarding_Location" id="Boarding_Location" value="@Model.Boarding_Location">
+                        </div>
+                        <div data-role="fieldcontain">
+                            <input name="Drop_off_location" id="Drop_off_location" value="@Model.Drop_off_location">
+                        </div>
+                    </div>
+                    <iframe id="embedmap" style="width:100%;height:500px;" frameborder="0"></iframe>
+                    <button class="button" onclick="txt()">路線顯示</button>
+                </div>
+
+            </div>
+
+            <div class="detail__information">
+                <h3 class="detail__information-title">詳細資料</h3>
+
+                <div class="detail__information-data">
+                    <i class="ri-list-ordered detail__information-icon">訂單編號</i>
+                    @Html.DisplayFor(model => model.Order_Num)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-taxi-line detail__information-icon">司機帳號</i>
+                    @Html.DisplayFor(model => model.Dr_ID)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-user-line detail__information-icon">乘客學號</i>
+                    @Html.DisplayFor(model => model.Cus_ID)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-refresh-line detail__information-icon">訂單狀態</i>
+                    @Html.DisplayFor(model => model.Ord_Status)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-menu-line detail__information-icon">訂單類型</i>
+                    @Html.DisplayFor(model => model.Ord_Type)
+                </div>
+                <div class="detail__information-data">
+                    <i class='ri-user-add-line detail__information-icon'>訂單人數</i>
+                    @Html.DisplayFor(model => model.Ord_Numpeople)
+                </div>
+                <div class="detail__information-data">
+                    <i class="bx bx-taxi detail__information-icon">交通工具</i>
+                    @Html.DisplayFor(model => model.Ord_Classification)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-calendar-line detail__information-icon">訂單日期</i>
+                    @Html.DisplayFor(model => model.Ord_date)
+                </div>
+                <div class="detail__information-data">
+                    <i class="ri-money-dollar-circle-line detail__information-icon">訂單金額</i>
+                    @Html.DisplayFor(model => model.Ord_Money)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-map-pin-user-line detail__information-icon">上車地點</i>
+                    @Html.DisplayFor(model => model.Boarding_Location)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-map-pin-line detail__information-icon">下車地點</i>
+                    @Html.DisplayFor(model => model.Drop_off_location)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-time-line detail__information-icon">上車時間</i>
+                    @Html.DisplayFor(model => model.Boarding_Time)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-timer-2-line detail__information-icon">下車時間</i>
+                    @Html.DisplayFor(model => model.Drop_off_Time)
+                </div>
+
+                <div class="detail__information-data">
+                    <i class="ri-timer-line detail__information-icon">乘車時間</i>
+                    @TempData["JT"]
+                </div>
+                @{
+                    var check = Html.DisplayFor(x => x.Ord_Status);
+                    if (Session["account"] != null && check.ToHtmlString() == "載客中")
+                    {
+                        <a onclick="location.href='@Url.Action("Cus_OrderDown","Order",new { id =Model.Order_Num })'" class="button">完成訂單</a>
+                        <a onclick="location.href='@Url.Action("Cus_lookDR_Details","Drivers",new { id=Model.Dr_ID})'" class="button">司機資料</a>
+                    }
+                    else
+                    {
+
+                    }
+                }
+                @*<a onclick="location.href='@Url.Action("Index","Order")'" class="button">回到訂單名單</a>*@
+            </div>
+        </div>
+    </section>
+
+</main>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>

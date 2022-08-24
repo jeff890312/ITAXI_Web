@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ITAXI.Models.information_OrderDB>
+
+@{
+    ViewBag.Title = "Index";
+    var account = "";
+    if (Session["admin"] == null || string.IsNullOrWhiteSpace(Session["admin"].ToString()))
+    {
+        Response.Redirect("~/Home/about");
+    }
+    else
+    {
+        account = Session["admin"].ToString();
+    }
+}
+<body>
+    <div class="table-container">
+        <h1 class="headimg">訂單名單</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        訂單編號
+                    </th>
+                    <th>
+                        訂單狀態
+                    </th>
+                    <th>
+                        司機編號
+                    </th>
+                    <th>
+                        乘客學號
+                    </th>
+                    <th>
+                        訂單類型
+                    </th>
+                    <th>
+                        日期
+                    </th>
+                    <th>
+                        交通工具
+                    </th>
+                    <th>
+                        搭車時間
+                    </th>
+                    <th>按鈕</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td data-label="訂單編號">
+                        @Html.DisplayFor(modelItem => item.Order_Num)
+                    </td>
+                    <td data-label="訂單狀態">
+                        @Html.DisplayFor(modelItem => item.Ord_Status)
+                    </td>
+                    <td data-label="司機編號">
+                        @Html.DisplayFor(modelItem => item.Dr_ID)
+                    </td>
+                    <td data-label=" 乘客學號">
+                        @Html.DisplayFor(modelItem => item.Cus_ID)
+                    </td>
+                    <td data-label="訂單類型">
+                        @Html.DisplayFor(modelItem => item.Ord_Type)
+                    </td>
+                    <td data-label="日期">
+                        @Html.DisplayFor(modelItem => item.Ord_date)
+                    </td>
+                    <td data-label="交通工具">
+                        @Html.DisplayFor(modelItem => item.Ord_Classification)
+                    </td>
+                    <td data-label="搭車時間">
+                        @Html.DisplayFor(modelItem => item.Boarding_Time)
+                    </td>
+                    <td data-label="按鈕">
+                        @Html.ActionLink("編輯", "Edit", new { id = item.Order_Num }, new { @class = "btn" })
+                        @Html.ActionLink("詳細資料", "Details", "Order", new { id = item.Order_Num }, new { @class = "btn" })
+                        @Html.ActionLink("刪除", "Delete", new { id = item.Order_Num }, new { @class = "btn" })
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</body>
+
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>

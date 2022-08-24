@@ -1,0 +1,51 @@
+﻿
+@model ITAXI.Models.information_OrderDB
+@{
+    ViewBag.Title = "beforehitchhiking";
+    <link href="~/Content/loading.css" rel="stylesheet" />
+}
+<body>
+
+
+    <div class="loading-window">
+
+        <div class="car">
+            <div class="strike"></div>
+            <div class="strike strike2"></div>
+            <div class="strike strike3"></div>
+            <div class="strike strike4"></div>
+            <div class="strike strike5"></div>
+            <div class="car-detail spoiler"></div>
+            <div class="car-detail back"></div>
+            <div class="car-detail center"></div>
+            <div class="car-detail center1"></div>
+            <div class="car-detail front"></div>
+            <div class="car-detail wheel"></div>
+            <div class="car-detail wheel wheel2"></div>
+        </div>
+
+        <div class="text">
+            <span>配對中</span>
+            <span class="dots">...</span>
+        </div>
+    </div>
+    <br />
+    <div style="max-width: 300px; margin: auto;">
+        @using (Html.BeginForm("OrderBack", "Order", new { id = Model.Order_Num }))
+        {
+            <input type="submit" class="login__button" value="取消訂單" />
+        }
+    </div>
+    <div style="max-width: 300px;margin:auto;">
+        @Html.ActionLink("詳細資料", "Details", "Order", new { id = Model.Order_Num }, new { @class = "login__button" })
+    </div>
+</body>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+
+<script>
+    setInterval('window.location.reload();', 10000);
+</script>

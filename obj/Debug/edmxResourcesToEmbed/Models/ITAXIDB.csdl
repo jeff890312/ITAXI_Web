@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ITAXIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CustomerDB">
+    <Key>
+      <PropertyRef Name="Cus_ID" />
+    </Key>
+    <Property Name="Cus_ID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Cus_Name" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cus_Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Cus_Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cus_Sex" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Cus_Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="information_OrderDB" Relationship="Self.FK_information_OrderDB_CustomerDB" FromRole="CustomerDB" ToRole="information_OrderDB" />
+    <Property Name="Cus_Email" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DriverDB">
+    <Key>
+      <PropertyRef Name="Dr_ID" />
+    </Key>
+    <Property Name="Dr_Num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dr_ID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dr_Name" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dr_Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Dr_Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dr_Sex" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Dr_Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Dr_License" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Dr_vehicle_license" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Dr_good_citizen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Dr_taxi_driver_license" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="information_OrderDB" Relationship="Self.FK_information_OrderDB_DriverDB" FromRole="DriverDB" ToRole="information_OrderDB" />
+    <Property Name="Dr_Email" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="EvaluationDB">
+    <Key>
+      <PropertyRef Name="Ev_Num" />
+    </Key>
+    <Property Name="Ev_Num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_Num" Type="Int32" />
+    <Property Name="Ev_Estar" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ev_evaluation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="information_OrderDB" Relationship="ITAXIModel.FK_EvaluationDB_information_OrderDB" FromRole="EvaluationDB" ToRole="information_OrderDB" />
+  </EntityType>
+  <EntityType Name="information_OrderDB">
+    <Key>
+      <PropertyRef Name="Order_Num" />
+    </Key>
+    <Property Name="Order_Num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dr_ID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Cus_ID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Ord_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ord_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ord_date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ord_Money" Type="Byte" Nullable="false" />
+    <Property Name="Boarding_Time" Type="Time" Nullable="false" Precision="0" />
+    <Property Name="Boarding_Location" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Drop_off_Time" Type="Time" Precision="0" />
+    <Property Name="Drop_off_location" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Journey_Time" Type="Time" Precision="0" />
+    <NavigationProperty Name="CustomerDB" Relationship="Self.FK_information_OrderDB_CustomerDB" FromRole="information_OrderDB" ToRole="CustomerDB" />
+    <NavigationProperty Name="DriverDB" Relationship="Self.FK_information_OrderDB_DriverDB" FromRole="information_OrderDB" ToRole="DriverDB" />
+    <NavigationProperty Name="EvaluationDB" Relationship="ITAXIModel.FK_EvaluationDB_information_OrderDB" FromRole="information_OrderDB" ToRole="EvaluationDB" />
+    <Property Name="Ord_Numpeople" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Ord_Classification" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_information_OrderDB_CustomerDB">
+    <End Role="CustomerDB" Type="Self.CustomerDB" Multiplicity="1" />
+    <End Role="information_OrderDB" Type="Self.information_OrderDB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerDB">
+        <PropertyRef Name="Cus_ID" />
+      </Principal>
+      <Dependent Role="information_OrderDB">
+        <PropertyRef Name="Cus_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_information_OrderDB_DriverDB">
+    <End Role="DriverDB" Type="Self.DriverDB" Multiplicity="0..1" />
+    <End Role="information_OrderDB" Type="Self.information_OrderDB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DriverDB">
+        <PropertyRef Name="Dr_ID" />
+      </Principal>
+      <Dependent Role="information_OrderDB">
+        <PropertyRef Name="Dr_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ITAXIEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CustomerDB" EntityType="Self.CustomerDB" />
+    <EntitySet Name="DriverDB" EntityType="Self.DriverDB" />
+    <EntitySet Name="EvaluationDB" EntityType="Self.EvaluationDB" />
+    <EntitySet Name="information_OrderDB" EntityType="Self.information_OrderDB" />
+    <AssociationSet Name="FK_information_OrderDB_CustomerDB" Association="Self.FK_information_OrderDB_CustomerDB">
+      <End Role="CustomerDB" EntitySet="CustomerDB" />
+      <End Role="information_OrderDB" EntitySet="information_OrderDB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_information_OrderDB_DriverDB" Association="Self.FK_information_OrderDB_DriverDB">
+      <End Role="DriverDB" EntitySet="DriverDB" />
+      <End Role="information_OrderDB" EntitySet="information_OrderDB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EvaluationDB_information_OrderDB" Association="ITAXIModel.FK_EvaluationDB_information_OrderDB">
+      <End Role="information_OrderDB" EntitySet="information_OrderDB" />
+      <End Role="EvaluationDB" EntitySet="EvaluationDB" />
+    </AssociationSet>
+    <EntitySet Name="information_Dr_Order" EntityType="ITAXIModel.information_Dr_Order" />
+  </EntityContainer>
+  <Association Name="FK_EvaluationDB_information_OrderDB">
+    <End Type="ITAXIModel.information_OrderDB" Role="information_OrderDB" Multiplicity="0..1" />
+    <End Type="ITAXIModel.EvaluationDB" Role="EvaluationDB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="information_OrderDB">
+        <PropertyRef Name="Order_Num" />
+      </Principal>
+      <Dependent Role="EvaluationDB">
+        <PropertyRef Name="Order_Num" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="information_Dr_Order">
+    <Key>
+      <PropertyRef Name="Order_Num" />
+    </Key>
+    <Property Name="Order_Num" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dr_ID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Cus_ID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Name="Ord_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Ord_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Ord_date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Ord_Numpeople" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Ord_Money" Type="Byte" />
+    <Property Name="Boarding_Time" Type="Time" Precision="0" />
+    <Property Name="Boarding_Location" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Drop_off_Time" Type="Time" Precision="0" />
+    <Property Name="Drop_off_location" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Journey_Time" Type="Time" Precision="0" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,191 @@
+﻿@model ITAXI.Models.information_OrderDB
+
+@{
+    ViewBag.Title = "Cancelorder";
+}
+
+<h2>Cancelorder</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Order_Num)
+    @Html.HiddenFor(model => model.Drop_off_Time)
+    @Html.HiddenFor(model => model.Journey_Time)
+
+    <body>
+
+        <div class="logindr">
+            <h1 style="text-align:center">確定要取消訂單嗎?</h1>
+            <div align="center">
+                <button type="submit" class="login__button">確定取消</button>
+            </div>
+            <div class="logindr__content" style="display:none">
+                <div class="logindr__img">
+                    <img src="~/mapimage/R15_R16.jpg" alt="" />
+                </div>
+
+                <div class="logindr__forms">
+                    <div class="logindr__register" id="login-in">
+                        <h1 class="logindr__title">確認接單?</h1>
+                        <div>
+                            <div class="logindr__box">
+                                <div class="logindr__label">
+                                    <i class="ri-steering-fill logindr__icon"></i>
+                                    @Html.LabelFor(model => model.Dr_ID, "司機", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <div class="logindr__readtext">
+                                    <input type="text" name="Dr_ID" value="@Session["Dr_account"]" readonly="readonly" />
+                                </div>
+                                @*@Html.EditorFor(model => model.Cus_ID, new { htmlAttributes = new { @class = "login__input", @readonly = "readonly" } })*@
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Dr_ID, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="logindr__box">
+                                <div class="logindr__label">
+                                    <i class="bx bx-user logindr__icon"></i>
+                                    @Html.LabelFor(model => model.Cus_ID, "乘客", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Cus_ID, new { htmlAttributes = new { @class = "login__readtext", @readonly = "readonly" } })
+                                @*<div class="logindr__readtext">
+                                        @Html.DisplayFor(model => model.Cus_ID)
+                                    </div>*@
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Cus_ID, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div style="display:none">
+                            <div class="logindr__box">
+                                <div class="logindr__label">
+                                    <i class="ri-stack-line logindr__icon"></i>
+                                    @Html.LabelFor(model => model.Ord_Status, htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @*<div class="logindr__readtext">*@
+                                <input type="text" name="Ord_Status" value="已取消" readonly="readonly" class="logindr__readtext" />
+                            </div>
+                            @*</div>*@
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_Status, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="logindr__box">
+                                <div class="logindr__label">
+                                    <i class='bx bx-user-pin login__icon'></i>
+                                    @Html.LabelFor(model => model.Ord_Type, "訂單類型", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <div class="logindr__readtext">
+                                    @Html.EditorFor(model => model.Ord_Type, new { htmlAttributes = new { @class = "login__readtext", @readonly = "readonly" } })
+                                    @*@Html.DisplayFor(model => model.Ord_Type)*@
+                                </div>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_Type, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="logindr__box">
+                                <div class="logindr__label">
+                                    <i class="ri-calendar-2-line login__icon"></i>
+                                    @Html.LabelFor(model => model.Ord_date, "日期", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <div class="logindr__readtext">
+                                    @Html.EditorFor(model => model.Ord_date, new { htmlAttributes = new { @class = "login__readtext", @readonly = "readonly" } })
+                                    @*@Html.DisplayFor(model => model.Ord_date)*@
+                                </div>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_date, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+
+
+                        <div>
+                            <div class="logindr__box">
+                                <div class="logindr__label">
+                                    <i class="ri-time-line login__icon"></i>
+                                    @Html.LabelFor(model => model.Boarding_Time, "預約時間", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <div class="logindr__readtext">
+                                    @Html.EditorFor(model => model.Boarding_Time, new { htmlAttributes = new { @class = "login__readtext", @readonly = "readonly" } })
+                                    @*@Html.DisplayFor(model => model.Boarding_Time)*@
+                                </div>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Boarding_Time, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="logindr__box">
+                                <div class="logindr__label">
+                                    <i class="ri-money-cny-circle-line login__icon"></i>
+                                    @Html.LabelFor(model => model.Ord_Money, "本次收益", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <div class="logindr__readtext">
+                                    @Html.EditorFor(model => model.Ord_Money, new { htmlAttributes = new { @class = "login__readtext", @readonly = "readonly" } })
+                                    @*@Html.DisplayFor(model => model.Ord_Money)*@
+                                </div>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Ord_Money, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+                        <div>
+                            <div class="logindr__box">
+                                <div class="logindr__label">
+                                    <i class="ri-map-pin-line login__icon"></i>
+                                    @Html.LabelFor(model => model.Boarding_Location, "上車地點", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <div class="logindr__readtext">
+                                    @Html.EditorFor(model => model.Boarding_Location, new { htmlAttributes = new { @class = "login__readtext", @readonly = "readonly" } })
+                                    @*@Html.DisplayFor(model => model.Boarding_Location)*@
+                                </div>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Boarding_Location, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="logindr__box">
+                                <div class="logindr__label">
+                                    <i class="ri-map-pin-line login__icon"></i>
+                                    @Html.LabelFor(model => model.Drop_off_location, "下車地點", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <div class="logindr__readtext">
+                                    @Html.EditorFor(model => model.Drop_off_location, new { htmlAttributes = new { @class = "login__readtext", @readonly = "readonly" } })
+                                    @*@Html.DisplayFor(model => model.Drop_off_location)*@
+                                </div>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Drop_off_location, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <button type="submit" class="login__button">確認接單</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line scrollup__icon"></i>
+    </a>
+    <script src="~/Scripts/main.js"></script>
+}
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>

@@ -1,0 +1,160 @@
+﻿@model ITAXI.Models.CustomerDB
+
+@{
+    ViewBag.Title = "會員申請";
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+}
+
+
+
+@using (Html.BeginForm("Create", "Customers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <body>
+        <div class="login">
+            <div class="login__content">
+                <div class="login__img">
+                    <img src="~/image/customer.svg" alt="" />
+                </div>
+
+                <div class="logincus__forms">
+                    <div class="login__register" id="login-in">
+                        <h1 class="login__title">註冊</h1>
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class="bx bx-user login__icon"></i>
+                                    @Html.LabelFor(model => model.Cus_ID, "學號", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Cus_ID, new { htmlAttributes = new { @class = "login__input" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Cus_ID, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-user-pin login__icon'></i>
+                                    @Html.LabelFor(model => model.Cus_Name, "姓名", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Cus_Name, new { htmlAttributes = new { @class = "login__input" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Cus_Name, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-phone login__icon'></i>
+                                    @Html.LabelFor(model => model.Cus_Phone, "電話", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Cus_Phone, new { htmlAttributes = new { @class = "login__input" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Cus_Phone, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-mail-send login__icon'></i>
+                                    @Html.LabelFor(model => model.Cus_Email, "電子信箱", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Cus_Email, new { htmlAttributes = new { @class = "login__input" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Cus_Email, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        @*<div>
+            <div class="login__box">
+                <div class="login__label">
+        <i class="ri-mail-line login__icon"></i>
+                    @Html.LabelFor(model => model.Cus_Phone, "電子郵件", htmlAttributes: new { @class = "login__text" })
+                </div>
+                @Html.EditorFor(model => model.Cus_Phone, new { htmlAttributes = new { @class = "login__input" } })
+            </div>
+            <div class="danger__box">
+                @Html.ValidationMessageFor(model => model.Cus_Phone, "", new { @class = "text__danger" })
+            </div>
+        </div>*@
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class="bx bx-lock login__icon"></i>
+                                    @Html.LabelFor(model => model.Cus_Password, "密碼", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Cus_Password, new { htmlAttributes = new { @class = "login__input" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Cus_Password, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                <div class="login__label">
+                                    <i class='bx bx-heart  login__icon'></i>
+                                    @Html.LabelFor(model => model.Cus_Sex, "性別", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                <select name="Cus_Sex" class="login__input">
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Cus_Sex, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="login__box">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="login__label">
+                                    <i class='bx bx-image login__icon'></i>
+                                    @Html.LabelFor(model => model.Cus_Photo, "大頭貼", htmlAttributes: new { @class = "login__text" })
+                                </div>
+                                @Html.EditorFor(model => model.Cus_Photo, new { htmlAttributes = new { @class = "login__input", @type = "file" } })
+                            </div>
+                            <div class="danger__box">
+                                @Html.ValidationMessageFor(model => model.Cus_Photo, "", new { @class = "text__danger" })
+                            </div>
+                        </div>
+
+
+                        <button type="submit" class="login__button">註冊</button>
+                        <div>
+                            <span class="login__account">已經有帳號?</span>
+                            <span class="login__signin" id="sign-up" onclick="location.href='@Url.Action("Login", "Customers")'">登入</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+}
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<script src="~/Scripts/main.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

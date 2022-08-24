@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ITAXI.Models.EvaluationDB>
+
+@{
+    ViewBag.Title = "Index";
+    var account = "";
+    if (Session["admin"] == null || string.IsNullOrWhiteSpace(Session["admin"].ToString()))
+    {
+        Response.Redirect("~/Home/about");
+    }
+    else
+    {
+        account = Session["admin"].ToString();
+    }
+}
+
+
+<body>
+    <div class="table-container">
+        <h1 class="headimg">評價名單</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        評價編號
+                    </th>
+                    <th>
+                        訂單編號
+                    </th>
+                    <th>
+                        司機編號
+                    </th>
+                    @*<th>
+                        司機評價
+                    </th>*@
+                    <th>
+                        評價星星
+                    </th>
+                    <th>
+                        評價回饋
+                    </th>
+                    <th>按鈕</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td data-label="評價編號">
+                            @Html.DisplayFor(modelItem => item.Ev_Num)
+                        </td>
+                        <td data-label="訂單編號">
+                            @Html.DisplayFor(modelItem => item.Order_Num)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.information_OrderDB.Dr_ID)
+                        </td>
+                        @*<td>
+                            @{
+                                var check = Html.DisplayFor(modelItem => item.Ev_Estar);
+                                string number = "0";
+                                if (check.ToHtmlString() == "5星評價")
+                                {
+                                    number = "5";
+                                }
+                                else if (check.ToHtmlString() == "4星評價")
+                                {
+                                    number = "4";
+                                }
+                                else if (check.ToHtmlString() == "3星評價")
+                                {
+                                    number = "3";
+                                }
+                                else if (check.ToHtmlString() == "2星評價")
+                                {
+                                    number = "2";
+                                }
+                                else if (check.ToHtmlString() == "1星評價")
+                                {
+                                    number = "1";
+                                }
+                                //var count = item.information_OrderDB1.Dr_ID.Count() * number*2;
+                                int nnn = Int32.Parse(number);
+                                var count = item.information_OrderDB1.Dr_ID.Count() / nnn+1;
+                                @count
+                            }
+                        </td>*@
+                        <td data-label="評價星星">
+                            @Html.DisplayFor(modelItem => item.Ev_Estar)
+                        </td>
+                        <td data-label="評價文字">
+                            @Html.DisplayFor(modelItem => item.Ev_evaluation)
+                        </td>
+                        <td data-label="按鈕">
+                            @*@Html.ActionLink("編輯", "Edit", new { id = item.Ev_Num }, new { @class = "btn" })*@
+                            @Html.ActionLink("詳細資料", "Details", new { id = item.Ev_Num }, new { @class = "btn" })
+                            @Html.ActionLink("刪除", "Delete", new { id = item.Ev_Num }, new { @class = "btn" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</body>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>

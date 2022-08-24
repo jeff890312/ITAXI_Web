@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ITAXIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CustomerDB">
+    <Key>
+      <PropertyRef Name="Cus_ID" />
+    </Key>
+    <Property Name="Cus_ID" Type="char" MaxLength="8" Nullable="false" />
+    <Property Name="Cus_Name" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="Cus_Phone" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Cus_Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Cus_Sex" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Cus_Email" Type="varchar" MaxLength="120" />
+    <Property Name="Cus_Photo" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="DriverDB">
+    <Key>
+      <PropertyRef Name="Dr_ID" />
+    </Key>
+    <Property Name="Dr_Num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dr_ID" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="Dr_Name" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="Dr_Phone" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Dr_Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Dr_Sex" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="Dr_Email" Type="varchar" MaxLength="120" />
+    <Property Name="Dr_Photo" Type="varchar(max)" />
+    <Property Name="Dr_License" Type="varchar(max)" />
+    <Property Name="Dr_vehicle_license" Type="varchar(max)" />
+    <Property Name="Dr_good_citizen" Type="varchar(max)" />
+    <Property Name="Dr_taxi_driver_license" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="EvaluationDB">
+    <Key>
+      <PropertyRef Name="Ev_Num" />
+    </Key>
+    <Property Name="Ev_Num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Order_Num" Type="int" />
+    <Property Name="Ev_Estar" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Ev_evaluation" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="information_Dr_Order">
+    <Key>
+      <PropertyRef Name="Order_Num" />
+    </Key>
+    <Property Name="Order_Num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dr_ID" Type="varchar" MaxLength="16" />
+    <Property Name="Cus_ID" Type="char" MaxLength="8" />
+    <Property Name="Ord_Status" Type="varchar" MaxLength="10" />
+    <Property Name="Ord_Type" Type="varchar" MaxLength="10" />
+    <Property Name="Ord_date" Type="varchar" MaxLength="20" />
+    <Property Name="Ord_Numpeople" Type="varchar" MaxLength="10" />
+    <Property Name="Ord_Money" Type="tinyint" />
+    <Property Name="Boarding_Time" Type="time" Precision="0" />
+    <Property Name="Boarding_Location" Type="varchar" MaxLength="20" />
+    <Property Name="Drop_off_Time" Type="time" Precision="0" />
+    <Property Name="Drop_off_location" Type="varchar" MaxLength="20" />
+    <Property Name="Journey_Time" Type="time" Precision="0" />
+  </EntityType>
+  <EntityType Name="information_OrderDB">
+    <Key>
+      <PropertyRef Name="Order_Num" />
+    </Key>
+    <Property Name="Order_Num" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dr_ID" Type="varchar" MaxLength="16" />
+    <Property Name="Cus_ID" Type="char" MaxLength="8" Nullable="false" />
+    <Property Name="Ord_Status" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Ord_Type" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Ord_date" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Ord_Classification" Type="varchar" MaxLength="10" />
+    <Property Name="Ord_Numpeople" Type="varchar" MaxLength="10" />
+    <Property Name="Ord_Money" Type="tinyint" Nullable="false" />
+    <Property Name="Boarding_Time" Type="time" Precision="0" Nullable="false" />
+    <Property Name="Boarding_Location" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Drop_off_Time" Type="time" Precision="0" />
+    <Property Name="Drop_off_location" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Journey_Time" Type="time" Precision="0" />
+  </EntityType>
+  <Association Name="FK_EvaluationDB_information_OrderDB">
+    <End Role="information_OrderDB" Type="Self.information_OrderDB" Multiplicity="0..1" />
+    <End Role="EvaluationDB" Type="Self.EvaluationDB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="information_OrderDB">
+        <PropertyRef Name="Order_Num" />
+      </Principal>
+      <Dependent Role="EvaluationDB">
+        <PropertyRef Name="Order_Num" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_information_OrderDB_CustomerDB">
+    <End Role="CustomerDB" Type="Self.CustomerDB" Multiplicity="1" />
+    <End Role="information_OrderDB" Type="Self.information_OrderDB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerDB">
+        <PropertyRef Name="Cus_ID" />
+      </Principal>
+      <Dependent Role="information_OrderDB">
+        <PropertyRef Name="Cus_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_information_OrderDB_DriverDB">
+    <End Role="DriverDB" Type="Self.DriverDB" Multiplicity="0..1" />
+    <End Role="information_OrderDB" Type="Self.information_OrderDB" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DriverDB">
+        <PropertyRef Name="Dr_ID" />
+      </Principal>
+      <Dependent Role="information_OrderDB">
+        <PropertyRef Name="Dr_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ITAXIModelStoreContainer">
+    <EntitySet Name="CustomerDB" EntityType="Self.CustomerDB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DriverDB" EntityType="Self.DriverDB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EvaluationDB" EntityType="Self.EvaluationDB" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="information_Dr_Order" EntityType="Self.information_Dr_Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="information_OrderDB" EntityType="Self.information_OrderDB" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_EvaluationDB_information_OrderDB" Association="Self.FK_EvaluationDB_information_OrderDB">
+      <End Role="information_OrderDB" EntitySet="information_OrderDB" />
+      <End Role="EvaluationDB" EntitySet="EvaluationDB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_information_OrderDB_CustomerDB" Association="Self.FK_information_OrderDB_CustomerDB">
+      <End Role="CustomerDB" EntitySet="CustomerDB" />
+      <End Role="information_OrderDB" EntitySet="information_OrderDB" />
+    </AssociationSet>
+    <AssociationSet Name="FK_information_OrderDB_DriverDB" Association="Self.FK_information_OrderDB_DriverDB">
+      <End Role="DriverDB" EntitySet="DriverDB" />
+      <End Role="information_OrderDB" EntitySet="information_OrderDB" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

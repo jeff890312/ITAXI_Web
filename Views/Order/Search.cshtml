@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+
+<script src="~/Scripts/main.js"></script>
+<div class="container">
+    <form method="post" action="@Url.Action("Search_Evaluations")" enctype="multipart/form-data">
+        <main>
+            <section class="detail section" id="detail">
+                <h2 class="section__title">查詢評價</h2>
+
+                <div class="detail__container grid">
+                    <div class="detail__data">
+                        <img src="~/image/Ranking_Isometric.svg" class="detail__img" style="width:500px; height:500px;" />
+
+                    </div>
+
+                    <div class="detail__information">
+                        <h3 class="detail__information-title">輸入司機ID</h3>
+
+                        <div class="detail__information-data">
+                            <i class="ri-user-star-line detail__information-icon"></i>
+                            <input type="text" formaction="" id="Evano" name="Evano" size="20" style="background-color:white;" />
+                        </div>
+                        <input type="submit" value="查詢" class="button" />
+                        
+                        @*<a onclick="location.href='@Url.Action("Earnings_oneday","Order")'" class="button">查詢</a>*@
+                    </div>
+                </div>
+            </section>
+        </main>
+    </form>
+</div>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+

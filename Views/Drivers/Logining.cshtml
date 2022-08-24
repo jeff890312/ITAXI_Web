@@ -1,0 +1,159 @@
+﻿@model ITAXI.Models.DriverDB
+@{
+    ViewBag.Title = "ITAXI首頁";
+}
+@if (TempData["message"] != null)
+{
+    <script type="text/javascript">
+        var message =@Html.Raw(Json.Encode(TempData["message"]));
+        alert(message);
+    </script>
+}
+@{
+    var customerAccount = Session["account"] as String;
+    var driverAccount = Session["Dr_account"] as String;
+    var loginAsCustomer = !string.IsNullOrEmpty(customerAccount);
+    var loginAsDriver = !string.IsNullOrEmpty(driverAccount);
+    var guest = !loginAsCustomer && !loginAsDriver;
+    var controllerName = "";
+    var account = "";
+    controllerName = "Drivers";
+    account = driverAccount;
+    <main>
+        @*封面照片*@
+        <section class="home" id="home">
+            <img src="~/image/driver_2.jpg" alt="" class="home__img" />
+            <div class="home__container container grid">
+                <div class="home__data">
+                    <span class="home__data-subtitle">
+                        快速方便，叫車不用等<br>品質第一，顧客至上<br>你值得擁有尊貴的服務。
+                    </span>
+                    <h1 class="home__data-title">ITAXI</h1>
+                </div>
+            </div>
+        </section>
+        @*載客*@
+        <section class="driver section">
+            <div class="driver__container container grid">
+                <div class="driver__img">
+                    <div class="driver__img-overlay">
+                        <img src="~/image/driver_2.jpg" alt="" class="driver__img-one" />
+                    </div>
+                </div>
+                <div class="driver__data">
+                    <h2 class="section__title driver__title">開始載客</h2>
+                    <a onclick="location.href='@Url.Action("immediately", "Order")'" class="button" style="margin-bottom:10px;">立即訂單-汽車</a>
+                    <a onclick="location.href='@Url.Action("immediately_Moto", "Order")'" class="button" style="margin-bottom:10px;">立即訂單-摩托車</a>
+                    <br>
+                    <br>
+                    <a onclick="location.href='@Url.Action("reservation", "Order")'" class="button" style="margin-bottom:10px;">預約訂單-汽車</a>
+                    <a onclick="location.href='@Url.Action("reservation_Moto", "Order")'" class="button" style="margin-bottom:10px;">預約訂單-摩托車</a>
+                </div>
+            </div>
+        </section>
+        @*會員資訊*@
+        <section class="driver section">
+            <div class="driver__container container grid">
+                <div class="driver__img">
+                    <div class="driver__img-overlay">
+                        <img src="~/image/taxi_cartoon_2.jpg" alt="" class="driver__img-one" />
+                    </div>
+                </div>
+                <div class="driver__data">
+                    <div class="driver__data">
+                        <h2 class="section__title driver__title">個人資訊</h2>
+                        <a onclick="location.href='@Url.Action("PassengerRecord", "Order")'" class="button" style="margin-bottom:10px;">載客紀錄</a>
+                        <a onclick="location.href='@Url.Action("Edit/" + account, controllerName)'" class="button" style="margin-bottom:10px;">更改會員資料</a>
+                        <a onclick="location.href='@Url.Action("Earn_day", "Order")'" class="button" style="margin-bottom:10px;">查詢收益</a>
+                        <form method="post" action="@Url.Action("Search_Evaluations","Order")" enctype="multipart/form-data">
+                            <input type="text" formaction="" id="Evano" name="Evano" size="20" style="display:none" value="@account" />
+                            <input type="submit" value="我的評價" class="button" style="margin:10px 0px 0px 0px" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @*聯絡我們*@
+        <section class="contact section" id="contact">
+            <div class="contact__container container grid">
+                <div class="contact__img">
+                    <div class="contact__img-overlay">
+                        <img src="~/image/customerservice_2.jpg" alt="" class="contact__img-one" />
+                    </div>
+                </div>
+                <div class="contact__data">
+                    <h2 class="section__title contact__title">讓我們變得更好~</h2>
+                    <a onclick="location.href='@Url.Action("Contact", "Home")'" class="button" style="margin-bottom:10px;">意見回饋</a>
+                    <a onclick="location.href='@Url.Action("QA", "Home")'" class="button" style="margin-bottom:10px;">常見問題</a>
+                    <a onclick="location.href='@Url.Action("Search", "Order")'" class="button" style="margin-bottom:10px;">查詢司機評價</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <a href="#" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-line scrollup__icon"></i>
+    </a>
+    <hr />
+    <footer class="footer section">
+        <div class="footer__container grid">
+            <div class="footer__data">
+                <h3 class="footer__subtitle">司機</h3>
+                <ul>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Create", "Drivers")'" class="footer__link">司機註冊</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Login", "Drivers")'" class="footer__link">司機登入</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("reservation", "Order")'" class="footer__link">預約訂單</a>
+                    </li>
+                    <li class="footer__item">
+
+                        <a onclick="location.href='@Url.Action("immediately", "Order")'" class="footer__link">立即訂單</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Details/" + account, controllerName)')" class="footer__link">個人資訊</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Contact", "Home")'" class="footer__link">聯絡我們</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("QA", "Home")'" class="footer__link">常見問題</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer__data">
+                <h3 class="footer__subtitle">乘客</h3>
+                <ul>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Create", "Customers")'" class="footer__link">乘客註冊</a>
+                    </li>
+                    <li class="footer__item">
+                        <a onclick="location.href='@Url.Action("Login", "Customers")'" class="footer__link">乘客登入</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__data">
+                <h3 class="footer__title">ITAXI</h3>
+                <p class="footer__description"></p>
+                <div>
+                    <a href="#" target="_blank" class="footer__social">
+                        <i class="ri-app-store-line"></i>
+                    </a>
+                    <a href="#" target="_blank" class="footer__social">
+                        <i class="ri-google-play-line"></i>
+                    </a>
+                    <a href="#" target="_blank" class="footer__social">
+                        <i class="ri-mail-line"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__right">
+            <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+        </div>
+
+    </footer>
+}

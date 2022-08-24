@@ -1,0 +1,54 @@
+﻿@model ITAXI.Models.EvaluationDB
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<main>
+    <section class="detail section" id="detail">
+        <h2 class="section__title">評價詳細資料</h2>
+
+        <div class="detail__container grid">
+            <div class="detail__data">
+                <img src="~/image/designer.svg" alt="" class="detail__img" />
+            </div>
+
+            <div class="detail__information">
+                <h3 class="detail__information-title">詳細資料</h3>
+
+                <div class="detail__information-data">
+                    <i class='bx bxl-product-hunt detail__information-icon'></i>
+                    @Html.DisplayFor(model => model.Ev_Num)
+                </div>
+                <div class="detail__information-data">
+                    <i class="bx bx-border-all detail__information-icon"></i>
+                    @Html.DisplayFor(model => model.Order_Num)<b>號訂單</b>
+                </div>
+                <div class="detail__information-data">
+                    <i class="bx bx-star detail__information-icon"></i>
+                    @Html.DisplayFor(model => model.Ev_Estar)
+                </div>
+                <div class="detail__information-data">
+                    <i class="bx bx-text detail__information-icon"></i>
+                    @Html.DisplayFor(model => model.Ev_evaluation)
+                </div>
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="確認刪除" class="button" onclick="location.href='@Url.Action("Index","Evaluations")'" />
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>

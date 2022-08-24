@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "AdminHome";
+}
+<main>
+    @*封面照片*@
+    <section class="home" id="home">
+        <img src="~/image/header_1.jpg" alt="" class="home__img" />
+        <div class="home__container container grid">
+            <div class="home__data">
+                <span class="home__data-subtitle">
+                    快速方便，叫車不用等<br>品質第一，顧客至上<br>你值得擁有尊貴的服務。
+                </span>
+                <h1 class="home__data-title">ITAXI管理員中心</h1>
+            </div>
+        </div>
+    </section>
+
+    @*訂單*@
+    <section class="contact section" id="contact">
+        <div class="contact__container container grid">
+            <div class="contact__img">
+                <div class="contact__img-overlay">
+                    <img src="~/image/customerservice_2.jpg" alt="" class="contact__img-one" />
+                </div>
+            </div>
+            <div class="contact__data">
+                <h2 class="section__title contact__title">管理員中心</h2>
+                <a onclick="location.href='@Url.Action("Index", "Customers")'" class="button">乘客名單</a>
+                <a onclick="location.href='@Url.Action("Index", "Drivers")'" class="button">司機名單</a>
+                <a onclick="location.href='@Url.Action("Index", "Evaluations")'" class="button">評分名單</a>
+                <a onclick="location.href='@Url.Action("Index", "Order")'" class="button">訂單名單</a>
+            </div>
+        </div>
+    </section>
+</main>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<script src="~/Scripts/main.js"></script>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>

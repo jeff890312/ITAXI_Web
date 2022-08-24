@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    //icon
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+}
+
+<body>
+    <div class="login">
+        <div class="login__content">
+            <div class="login__img">
+                <img src="~/image/customer.svg" alt="" />
+            </div>
+
+            <div class="login__forms">
+                <form action="" method="post" class="login__register" id="login-in">
+                    <h1 class="login__title">登入</h1>
+                    <div style="color:red;">
+                        @ViewData["ErrorMessage"]
+                    </div>
+                    <div class="login__box">
+                        <i class="bx bx-user login__icon"></i>
+                        <input type="text" id="Cus_ID" name="Cus_ID" for="InputCusID" placeholder="輸入學號" value="" class="login__input" />
+                    </div>
+
+                    <div class="login__box">
+                        <i class="bx bx-lock login__icon"></i>
+                        <input type="password" id="Cus_Password" for="InputCusPassword" name="Cus_Password" placeholder="輸入密碼" value="" class="login__input" />
+                    </div>
+
+                    @*<a href="#" class="login__forgot">忘記密碼?</a>*@
+                    <button type="submit" class="login__button">登入</button>
+                    <div>
+                        <span class="login__account">還沒有帳號?</span>
+                        <span class="login__signin" id="sign-up" onclick="location.href='@Url.Action("Create", "Customers")'">註冊</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
+<script src="~/Scripts/main.js"></script>
+
+
+<script>
+    function register() {
+        location.href = "/Customer/Create";
+    }
+</script>
+

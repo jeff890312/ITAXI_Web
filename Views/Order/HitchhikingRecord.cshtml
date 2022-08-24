@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ITAXI.Models.information_OrderDB>
+<link href="~/Content/tickets.css" rel="stylesheet" />
+
+<body>
+    <section class="ticketcontainer">
+        <h1>搭車紀錄</h1>
+        @foreach (var item in Model)
+        {
+            <div class="ticketrow">
+                <article class="ticketcard">
+                    <section class="ticketdate">
+                        <time>
+                            @Html.DisplayFor(modelItem => item.Ord_date)
+                        </time>
+                    </section>
+                    <section class="ticketcard-cont">
+                        <div class="text-status">
+                            <p style="color: red">
+                                @Html.DisplayFor(modelItem => item.Ord_Status)
+                            </p>
+                        </div>
+                        <h3>@Html.DisplayFor(modelItem => item.Ord_Type)-@Html.DisplayFor(modelItem => item.Ord_Classification)</h3>
+                        <div class="ticketeven-info">
+                            <p class="text-loca-time">
+                                @Html.DisplayFor(modelItem => item.Boarding_Location)
+                                @Html.DisplayFor(modelItem => item.Boarding_Time)
+                                <i class='bx bx-right-arrow-alt'></i>
+                                @Html.DisplayFor(modelItem => item.Drop_off_location)
+                                @Html.DisplayFor(modelItem => item.Drop_off_Time)
+                            </p>
+                        </div>
+                        <div class="ticketeven-date">
+                            <p class="ticket-person">
+                                @Html.DisplayFor(modelItem => item.DriverDB.Dr_Name)
+                            </p>
+                            <p class="ticket-person">
+                                @Html.DisplayFor(modelItem => item.Ord_Numpeople) (每人) @Html.DisplayFor(modelItem => item.Ord_Money)元
+                            </p>
+                        </div>
+
+                        <div onclick="txt()">
+                            @Html.ActionLink("詳細資料", "Details", "Order", new { id = item.Order_Num }, new { @class = "ticketcard-cont-button" })
+
+                        </div>
+                        <div>
+                            @{
+                                var check = Html.DisplayFor(modelItem => item.Ord_Status);
+                                if (check.ToHtmlString() == "配對中")
+                                {
+                                    @Html.ActionLink("取消訂單", "Cancelorder", "Order", new { id = item.Order_Num }, new { @class = "ticketcard-cont-button-can" })
+                                }
+                                else if (check.ToHtmlString() == "已取消")
+                                {
+
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                        </div>
+                    </section>
+                </article>
+            </div>
+        }
+    </section>
+</body>
+
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+<footer class="footer section">
+    <div class="footer__right">
+        <p class="footer__copy">&copy; @DateTime.Now.Year - ITAXI團隊</p>
+    </div>
+</footer>
