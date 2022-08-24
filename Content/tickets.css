@@ -1,0 +1,161 @@
+﻿/*ticket*/
+@import url('home.css');
+.ticketcontainer {
+    width: 90%;
+    margin: 100px auto
+}
+
+    .ticketcontainer h1 {
+        text-transform: uppercase;
+        font-weight: 900;
+        border-left: 10px solid var(--text-color);
+        padding-left: 10px;
+        margin-bottom: 30px
+    }
+
+.ticketrow {
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.ticketcard {
+    width: 100%;
+    background-color: #f0f0f0;
+    color: #989898;
+    margin-bottom: 10px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    border-radius: 4px;
+    position: relative;
+}
+
+
+.ticketdate {
+    display: table-cell;
+    width: 30%;
+    position: relative;
+    text-align: center;
+    border-right: 2px dashed var(--body-color)
+}
+
+    .ticketdate:before,
+    .ticketdate:after {
+        content: "";
+        display: block;
+        width: 30px;
+        height: 30px;
+        background-color: var(--body-color);
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        z-index: 1;
+        border-radius: 50%;
+    }
+
+    .ticketdate:after {
+        top: auto;
+        bottom: -15px
+    }
+
+    .ticketdate time {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%)
+    }
+
+        .ticketdate time span {
+            display: block
+        }
+
+
+.ticketcard-cont {
+    display: table-cell;
+    width: 70%;
+    font-size: 85%;
+    padding: 10px 10px 30px 50px
+}
+
+    .ticketcard-cont h3 {
+        color: #3C3C3C;
+        font-size: 130%
+    }
+
+
+    .ticketcard-cont > div {
+        display: table-row
+    }
+
+    .ticketcard-cont .ticketeven-date time,
+    .ticketcard-cont .ticketeven-info p {
+        display: table-cell
+    }
+
+
+
+    .ticketcard-cont .ticketeven-info p {
+        padding: 10px 50px 0 0;
+        font-size: 1.2rem;
+        color: blue;
+    }
+
+    .ticketcard-cont .ticketeven-date p {
+        display: block;
+        color: black;
+    }
+
+.ticketcard-cont-button {
+    display: block;
+    text-decoration: none;
+    width: 100px;
+    height: 30px;
+    color: #fff;
+    background-color: blue;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 2px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.ticketcard-cont-button-can {
+    display: block;
+    text-decoration: none;
+    width: 100px;
+    height: 30px;
+    color: #fff;
+    background-color: blue;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 2px;
+    position: absolute;
+    right: 10px;
+    bottom: 45px;
+}
+
+.text-status {
+    font-size: 1.5rem;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+
+@media screen and (max-width: 860px) {
+    .ticketcard {
+        display: block;
+        float: none;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+
+    .ticketcard-cont .ticketeven-date p,
+    .ticketcard-cont .ticketeven-info p {
+        font-size: 100%;
+    }
+}
